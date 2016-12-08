@@ -1,0 +1,17 @@
+.results {
+  display: flex;
+  flex-direction: row;
+}
+
+.doctors_list {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  height: 94%;
+}
+
+.doctors_map {
+  flex: 3;
+  height: 94%;
+  overflow-y: hidden;
+}

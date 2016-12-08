@@ -1,0 +1,21 @@
+.appBar {
+  color: white;
+  height: 3.7rem;
+  line-height: 2rem;
+  transition: padding 0.5s ease;
+}
+
+.searchless {
+  padding-bottom: 30%;
+  transition: padding 0.5s ease;
+}
+
+.search {
+  margin-top: 30%;
+  margin-right: 30rem;
+  transition: margin 0.5s ease;
+}
+
+.title {
+  font-size: 1.3rem !important;
+}
