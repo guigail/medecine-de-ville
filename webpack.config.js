@@ -50,7 +50,6 @@ function getRawCssLoaders(module, inject) {
 
 module.exports = {
   devServer: {
-    headers: { "Access-Control-Allow-Origin": "*" },
     quiet: false,
     stats: { colors: true },
     proxy: {

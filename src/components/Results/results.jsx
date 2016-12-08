@@ -1,5 +1,6 @@
 import React, { PropTypes } from 'react'
 import loader from 'hoc-react-loader'
+import {ProgressBar} from 'react-google-maps'
 import DoctorsList from './DoctorsList'
 import DoctorsMap from './DoctorsMap'
 import styles from './results.style'
@@ -25,4 +26,7 @@ Results.propTypes = {
   doctors: PropTypes.arrayOf(PropTypes.object).isRequired,
 }
 
-export default loader(Results, { wait: false })
+export default loader(Results, {
+    wait: ['doctors'],
+    LoadingIndicator: () => <ProgressBar type='circular' mode='indeterminate' multicolor/>,
+})

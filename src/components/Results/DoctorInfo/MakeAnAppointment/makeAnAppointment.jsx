@@ -46,8 +46,6 @@ class MakeAnAppointment extends React.Component {
 MakeAnAppointment.propTypes = {
   appointment: PropTypes.object,
   idDoctor: PropTypes.number.isRequired,
-  makeAnAppointment: PropTypes.function.isRequired,
-  cancelAnAppointment: PropTypes.function.isRequired,
 }
 
 export default MakeAnAppointment

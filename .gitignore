@@ -39,12 +39,4 @@ yarn.lock
 
 # Custom
 public
-.idea/compiler.xml
-.idea/copyright/
-.idea/encodings.xml
-.idea/jsLibraryMappings.xml
-.idea/misc.xml
-.idea/modules.xml
-.idea/react-redux-codelab.iml
-.idea/vcs.xml
-.idea/workspace.xml
+.idea
