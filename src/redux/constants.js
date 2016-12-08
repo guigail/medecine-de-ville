@@ -7,5 +7,5 @@ export const DOCTORS_LIST_TYPE = {
 }
 
 /* PAGE JAUNE API KEY */
-export const PAGEJAUNE_API_ID = '6d1fb818'
-export const PAGEJAUNE_API_KEY = '1114e37d7493965965287698a8ad7aa7'
+export const PAGEJAUNE_API_ID = 'API_ID'
+export const PAGEJAUNE_API_KEY = 'API_KEY'
