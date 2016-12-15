@@ -67,7 +67,7 @@ module.exports = {
   },
   devtool: dev ? 'eval' : '',
   entry: {
-    tvscrub: getEntrySources([
+    medecineDeVille: getEntrySources([
       './src',
     ]),
   },
@@ -87,8 +87,12 @@ module.exports = {
       loaders: getLoaders([]),
       exclude: /node_modules/,
     }, {
+      test: /global\.scss/,
+      loaders: dev ? getRawCssLoaders(false, true) : [],
+      loader: dev ? '' : ExtractTextPlugin.extract(getRawCssLoaders(false)),
+    }, {
       test: /\.s?css$/,
-      exclude: [path.resolve(__dirname, '/node_modules/rc-slider')],
+      exclude: [/global\.scss/],
       loaders: dev ? getRawCssLoaders(true, true) : [],
       loader: dev ? '' : ExtractTextPlugin.extract(getRawCssLoaders(true)),
     }],

@@ -1,18 +1,18 @@
 import { connect } from 'react-redux'
 import { getDrawerActive, getDrawerPinned } from 'redux/ui'
-import { getSearch } from 'redux/search'
+import { getSearch, isActive } from 'redux/search'
 import { toggleDrawerActive } from './appbar.actions'
 import Component from './appbar'
 
 const mapStateToProps = (state) => {
   const active = getDrawerActive(state)
   const pinned = getDrawerPinned(state)
-  const search = getSearch(state)
+  const searchIsActive = isActive(state)
 
   return {
     active,
     pinned,
-    search,
+    searchIsActive,
   }
 }
 

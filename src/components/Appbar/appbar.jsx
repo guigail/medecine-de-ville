@@ -3,16 +3,16 @@ import { AppBar } from 'react-toolbox'
 import Search from './Search'
 import styles from './appbar.style'
 
-const Appbar = ({ search: { where, who }, toggleDrawerActive }) => {
+const Appbar = ({searchIsActive, toggleDrawerActive }) => {
   return (
     <AppBar
       theme={styles}
-      className={!where || !who ? styles.searchless : ''}
+      className={!searchIsActive ? styles.searchless : ''}
       onLeftIconClick={toggleDrawerActive}
       title="Médecine de ville"
       leftIcon="menu"
     >
-      <Search className={!where || !who ? styles.search : ''} />
+      <Search className={!searchIsActive ? styles.search : ''} />
     </AppBar>
   )
 }

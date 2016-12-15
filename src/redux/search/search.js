@@ -1,6 +1,6 @@
 import { SET_WHERE, SET_WHO, SET_POSITION, RESET_POSITION } from './search.actions'
 
-export const initState = { where: '', who: [], position: { lat: 46.1279141, lng: -2.2770196 }, zoom: 6 }
+export const initState = { where: '', who: '', position: { lat: 46.1279141, lng: -2.2770196 }, zoom: 6 }
 export const initAction = { type: 'UNKNOWN' }
 
 export default (state = initState, { type, payload } = initAction) => {

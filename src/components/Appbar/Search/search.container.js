@@ -1,7 +1,7 @@
 import { connect } from 'react-redux'
 import { getWhere, getWho } from 'redux/search'
 import { DOCTORS_LIST_TYPE } from 'redux/constants'
-import { changeWhere, changeWho, updatePosition } from './search.actions'
+import { changeWhere, changeWho, updateMyPosition } from './search.actions'
 
 import Component from './search'
 
@@ -17,7 +17,7 @@ const mapDispatchToProps = (dispatch) => {
   return {
     onChangeWhere: e => dispatch(changeWhere(e.target.value)),
     onChangeWho: e => dispatch(changeWho(e.target.value)),
-    updatePosition: () => dispatch(updatePosition()),
+    updatePosition: () => dispatch(updateMyPosition()),
   }
 }
 

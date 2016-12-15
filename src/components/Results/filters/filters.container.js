@@ -2,7 +2,7 @@ import { connect } from 'react-redux'
 import { getFilters } from 'redux/filters'
 import { getFiltersActive } from 'redux/ui'
 import Component from './filters'
-import { applyFilters, toggleFilters } from './filters.actions'
+import { applyFiltersName, applyFiltersRAC, toggleFilters } from './filters.actions'
 
 const mapStateToProps = (state) => {
   const filters = getFilters(state)
@@ -16,8 +16,8 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    applyRACFilters: RAC => dispatch(applyFilters({ filters: { RAC } })),
-    applyNameFilters: name => dispatch(applyFilters({ filters: { name } })),
+    applyFiltersRAC: RAC => dispatch(applyFiltersRAC(RAC)),
+    applyFiltersName: name => dispatch(applyFiltersName(name)),
     toggleFilters: () => dispatch(toggleFilters()),
   }
 }

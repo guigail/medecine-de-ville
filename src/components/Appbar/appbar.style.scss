@@ -1,7 +1,5 @@
 .appBar {
   color: white;
-  height: 3.7rem;
-  line-height: 2rem;
   transition: padding 0.5s ease;
 }
 
@@ -17,7 +15,6 @@
 }
 
 .title {
-  font-size: 1.3rem !important;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;

@@ -6,14 +6,17 @@ import DoctorsMap from './DoctorsMap'
 import Filters from './Filters'
 import styles from './results.style'
 
-const Results = ({ doctors }) => {
-  let component = <h1 />
-  if (doctors.length > 0) {
+const Results = ({ doctors, searchIsActive }) => {
+  let component = <h1></h1>
+  if (searchIsActive) {
     component = (
       <div className={styles.results}>
         <div className={styles.doctors_list}>
           <Filters />
-          <DoctorsList doctors={doctors} />
+          {doctors.length > 0 ?
+            <DoctorsList doctors={doctors} /> :
+            <h1>Aucun résultat</h1>
+          }
         </div>
         <div className={styles.doctors_map}>
           <DoctorsMap doctors={doctors} />

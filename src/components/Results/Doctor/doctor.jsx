@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react'
 import loader from 'hoc-react-loader'
-import { ListItem, FontIcon, Tooltip, IconButton } from 'react-toolbox'
+import { ListItem, Tooltip, IconButton } from 'react-toolbox'
 import { styles } from './doctor.style'
 
 const TooltipButton = new Tooltip(IconButton)
@@ -9,7 +9,7 @@ const Doctor = ({ id, doctor, haveAppointment, showOnMap, showInfo }) => (
     themes={styles}
     selectable
     caption={doctor.name}
-    legend={doctor.address.address_street}
+    legend={`${doctor.address.address_street} - RAC [${doctor.RAC}]`}
     rightIcon={
       <TooltipButton
         label=""

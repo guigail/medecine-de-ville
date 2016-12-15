@@ -1,5 +1,5 @@
 import { API_URL_PAGEJAUNE_PRO, PAGEJAUNE_API_ID, PAGEJAUNE_API_KEY } from 'redux/constants'
-import { pick, filter } from 'lodash'
+import { pick, filter, random, toLower } from 'lodash'
 import { getSearch } from 'redux/search'
 import { getTimestamps } from 'redux/ui'
 import { getFilters } from 'redux/filters'
@@ -41,17 +41,18 @@ const fetchDoctors = ({ where, who }) => (dispatch, getState) => {
               contacts: doctor.inscriptions[0].contact_info,
               showOnMap: false,
               selected: i === 0,
-              RAC: i,
+              RAC: random(0, 100),
             }
           })
       }
       return {}
     })
     // apply filters
-    //.then((doctors) => {
-    //  dispatch(setDoctors(filter(doctors, d => (filters.RAC[0] < d.RAC && d.RAC < filters.RAC[1]))))
-    //})
-    .then((doctors) => dispatch(setDoctors(doctors)))
+    .then(doctors => filter(doctors, d => (
+      (filters.RAC[0] < d.RAC && d.RAC < filters.RAC[1]) &&
+      toLower(d.name).includes(toLower(filters.name))
+    )))
+    .then(doctors => dispatch(setDoctors(doctors)))
 }
 
 let timeout

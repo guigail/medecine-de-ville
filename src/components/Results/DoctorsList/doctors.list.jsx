@@ -5,7 +5,7 @@ import Doctor from '../Doctor'
 import styles from './doctors.list.style'
 
 const DoctorsList = ({ doctors, who }) => (
-  <List className={styles.list} selectable ripple>
+  <List className={styles.list} selectable>
     <ListSubHeader caption={who.join(', ')} />
     {doctors.map(doctor =>
       <Doctor className={styles.doctor} key={doctor.id} doctor={doctor} />)}
