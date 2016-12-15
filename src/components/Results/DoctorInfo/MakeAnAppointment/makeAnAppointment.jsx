@@ -39,7 +39,6 @@ class MakeAnAppointment extends React.Component {
       />
 
     </div>)
-
   }
 }
 

@@ -54,12 +54,12 @@ module.exports = {
     stats: { colors: true },
     proxy: {
       '/api_pj': {
-        'target': {
-          'host': 'api.apipagesjaunes.fr',
-          'protocol': 'https:',
-          'port': 443,
+        target: {
+          host: 'api.apipagesjaunes.fr',
+          protocol: 'https:',
+          port: 443,
         },
-        pathRewrite: {'^/api_pj' : ''},
+        pathRewrite: { '^/api_pj': '' },
         changeOrigin: true,
         secure: false,
       }
@@ -87,11 +87,8 @@ module.exports = {
       loaders: getLoaders([]),
       exclude: /node_modules/,
     }, {
-      test: /themes\/_themes\.scss/,
-      loaders: dev ? getRawCssLoaders(false, true) : [],
-      loader: dev ? '' : ExtractTextPlugin.extract(getRawCssLoaders(false)),
-    }, {
       test: /\.s?css$/,
+      exclude: [path.resolve(__dirname, '/node_modules/rc-slider')],
       loaders: dev ? getRawCssLoaders(true, true) : [],
       loader: dev ? '' : ExtractTextPlugin.extract(getRawCssLoaders(true)),
     }],
@@ -99,6 +96,6 @@ module.exports = {
   postcss: () => [autoprefixer],
   sassLoader: {
     data: '@import "theme/_config.scss";',
-    includePaths: [path.resolve(__dirname, './src')]
+    includePaths: [path.resolve(__dirname, './src')],
   },
 }

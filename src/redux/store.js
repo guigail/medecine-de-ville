@@ -7,6 +7,7 @@ import user from './user'
 import doctors from './doctors'
 import ui from './ui'
 import appointments from './appointments'
+import filters from './filters'
 
 const store = createStore(
   combineReducers({
@@ -15,6 +16,7 @@ const store = createStore(
     doctors,
     appointments,
     ui,
+    filters,
   }),
   compose(
     applyMiddleware(thunkMiddleware),

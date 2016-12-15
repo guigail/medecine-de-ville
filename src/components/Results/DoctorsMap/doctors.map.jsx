@@ -1,27 +1,27 @@
-import React, {PropTypes} from 'react'
-import {CardTitle} from 'react-toolbox'
+import React, { PropTypes } from 'react'
+import { CardTitle } from 'react-toolbox'
 import loader from 'hoc-react-loader'
-import {ProgressBar} from 'react-google-maps'
+import { ProgressBar } from 'react-google-maps'
 import GoogleMap from './GoogleMap'
 import styles from './doctors.map.style'
 
 const infoContent = (name, address) =>
-    <CardTitle
-        theme={styles}
-        avatar="https://placeimg.com/80/80/animals"
-        title={name}
-        subtitle={address}
-    />
+  <CardTitle
+    theme={styles}
+    avatar="https://placeimg.com/80/80/animals"
+    title={name}
+    subtitle={address}
+  />
 
-const DoctorsMap = ({className, doctors, position, showOnMap, hideOnMap}) => (
-    <div className={className}>
-        <GoogleMap
-            containerElement={<div style={{height: '100%'}}/>}
-            mapElement={<div style={{height: '100%'}}/>}
+const DoctorsMap = ({ className, doctors, position, showOnMap, hideOnMap }) => (
+  <div className={className}>
+    <GoogleMap
+      containerElement={<div style={{height: '100%'}}/>}
+      mapElement={<div style={{height: '100%'}}/>}
 
-            position={position}
+      position={position}
 
-            markers={
+      markers={
                 doctors.length > 0 ?
                     doctors.map(({geolocation: {latitude, longitude}, id, name, address: {address_street}, showOnMap, selected}) => {
                         return {
@@ -34,22 +34,22 @@ const DoctorsMap = ({className, doctors, position, showOnMap, hideOnMap}) => (
                     }) : []
             }
 
-            onMarkerClick={showOnMap}
-            onMarkerClose={hideOnMap}
-        />
-    </div>
+      onMarkerClick={showOnMap}
+      onMarkerClose={hideOnMap}
+    />
+  </div>
 )
 
 DoctorsMap.propTypes = {
-    className: PropTypes.string,
-    doctors: PropTypes.arrayOf(PropTypes.object).isRequired,
-    position: PropTypes.object.isRequired,
-    showOnMap: PropTypes.func,
-    hideOnMap: PropTypes.func,
+  className: PropTypes.string,
+  doctors: PropTypes.arrayOf(PropTypes.object).isRequired,
+  position: PropTypes.object.isRequired,
+  showOnMap: PropTypes.func,
+  hideOnMap: PropTypes.func,
 }
 
 
 export default loader(DoctorsMap, {
-    wait: ['doctors'],
-    LoadingIndicator: () => <ProgressBar type='circular' mode='indeterminate' multicolor/>,
+  wait: ['doctors'],
+  LoadingIndicator: () => <ProgressBar type="circular" mode="indeterminate" multicolor />,
 })

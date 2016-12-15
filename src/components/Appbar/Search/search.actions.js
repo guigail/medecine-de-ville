@@ -1,48 +1,47 @@
-import {PUSH} from 'redux-little-router'
-import {setWhere, setWho, setPosition, resetPosition, getSearch} from 'redux/search'
-import {lazyFetchDoctors, resetDoctors, unselectDoctors} from 'redux/doctors'
-import {getTitle} from 'redux/router'
-import {API_URL_PAGEJAUNE_PRO, PAGEJAUNE_API_ID, PAGEJAUNE_API_KEY} from 'redux/constants'
+import { PUSH } from 'redux-little-router'
+import { setWhere, setWho, setPosition, resetPosition } from 'redux/search'
+import { lazyFetchDoctors, unselectDoctors } from 'redux/doctors'
+import { getTitle } from 'redux/router'
 
 export const search = () => (dispatch, getState) => {
-    dispatch(lazyFetchDoctors())
+  dispatch(lazyFetchDoctors())
 
-    const title = getTitle(getState())
-    if (title !== 'HOME') {
-        dispatch({
-            type: PUSH,
-            payload: '/',
-        })
-    }
+  const title = getTitle(getState())
+  if (title !== 'HOME') {
+    dispatch({
+      type: PUSH,
+      payload: '/',
+    })
+  }
 }
 
 export const changeWhere = where => (dispatch) => {
-    dispatch(setWhere(where))
-    dispatch(search())
+  dispatch(setWhere(where))
+  dispatch(lazyFetchDoctors())
 }
 
 export const changeWho = who => (dispatch) => {
-    dispatch(setWho([who]))
-    dispatch(search())
+  dispatch(setWho([who]))
+  dispatch(lazyFetchDoctors())
 }
 
 const geolocation = (
-    navigator.geolocation ?
-        navigator.geolocation :
-        ({
-            getCurrentPosition(success, failure) {
-                failure("Your browser doesn't support geolocation.")
-            },
-        })
+  navigator.geolocation ?
+    navigator.geolocation :
+    ({
+      getCurrentPosition(success, failure) {
+        failure("Your browser doesn't support geolocation.")
+      },
+    })
 )
 
 export const updatePosition = () => (dispatch) => {
-    geolocation.getCurrentPosition(
-        (position) => {
-            dispatch(unselectDoctors())
-            dispatch(setPosition({lat: position.coords.latitude, lng: position.coords.longitude}))
-        },
-        (reason) => {
-            dispatch(resetPosition())
-        })
+  geolocation.getCurrentPosition(
+    (position) => {
+      dispatch(unselectDoctors())
+      dispatch(setPosition({ lat: position.coords.latitude, lng: position.coords.longitude }))
+    },
+    (reason) => {
+      dispatch(resetPosition())
+    })
 }
