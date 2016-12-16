@@ -1,0 +1,12 @@
+.selected {
+  background-color: #eee;
+  box-shadow : inset 0px 5px 10px -5px rgba(0, 0, 0, 0.26);
+  max-height: 100%;
+  transition: max-height .5s ease-in;
+}
+
+.notSelected {
+  overflow: hidden;
+  max-height: 0;
+  transition: max-height .5s ease-out;
+}

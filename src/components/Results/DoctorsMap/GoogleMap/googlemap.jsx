@@ -26,7 +26,7 @@ const iconDoctorSelected = {
 }
 
 const centerOfSelection = (markers, defaultPosition) => {
-  const marker = find(markers, { selected: true })
+  const marker = find(markers, { ui: { selected: true } })
   return marker ? marker.position : defaultPosition
 }
 
@@ -37,7 +37,7 @@ const GoogleMapMarker = withGoogleMap(({ markers, position, onMarkerClick, onMar
       gridSize={30}
       imagePath="/src/images/markers/cluster/doctors"
     >
-      {markers.map(({ id, position, showInfo, infoContent, selected }) => (
+      {markers.map(({ id, position, showInfo, infoContent }) => (
         <Marker
           key={id}
           position={position}
@@ -78,5 +78,5 @@ GoogleMapMarker.propTypes = {
 
 export default loader(GoogleMapMarker, {
   wait: ['markers'],
-  LoadingIndicator: () => <ProgressBar type="circular" mode="indeterminate" multicolor />,
+  LoadingIndicator: () => <ProgressBar type="circular" mode="indeterminate" multicolor/>,
 })

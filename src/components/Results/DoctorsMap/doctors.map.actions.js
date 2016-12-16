@@ -1,12 +1,14 @@
-import { setDoctors, getDoctors, setDoctor, getDoctor } from 'redux/doctors'
+import { selectDoctor, getDoctor, unselectDoctors } from 'redux/doctors'
+import { updatePosition } from 'redux/search'
 
-export const showOnMap = (id, isCenter) => (dispatch, getState) => {
-  dispatch(setDoctors(getDoctors(getState()).map((doctor) => {
-    return doctor.id === id ? { ...doctor, showOnMap: true } : { ...doctor, showOnMap: false }
-  })))
+export const select = id => (dispatch, getState) => {
+  dispatch(unselectDoctors())
+  dispatch(selectDoctor(getDoctor(getState(), id)))
 }
 
-export const hideOnMap = id => (dispatch, getState) => dispatch(setDoctor({
-  ...getDoctor(getState(), id),
-  showOnMap: false,
-}))
+export const unselect = () => dispatch => dispatch(unselectDoctors())
+
+export const updateMyPosition = () => (dispatch) => {
+  dispatch(unselectDoctors())
+  dispatch(updatePosition())
+}

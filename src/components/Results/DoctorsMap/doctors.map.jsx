@@ -13,39 +13,48 @@ const infoContent = (name, address) =>
     subtitle={address}
   />
 
-const DoctorsMap = ({ className, doctors, position, showOnMap, hideOnMap }) => (
-  <div className={className}>
-    <GoogleMap
-      containerElement={<div style={{height: '100%'}}/>}
-      mapElement={<div style={{height: '100%'}}/>}
+class DoctorsMap extends React.Component {
+  constructor(props) {
+    super(props)
+    console.log(props)
+    this.props.updateMyPosition()
+  }
 
-      position={position}
+  render() {
+    const { className, doctors, position, selectDoctor, unselectDoctor } = this.props
+    return (
+      <div className={className}>
+        <GoogleMap
+          containerElement={<div style={{height: '100%'}}/>}
+          mapElement={<div style={{height: '100%'}}/>}
 
-      markers={
-                doctors.length > 0 ?
-                    doctors.map(({geolocation: {latitude, longitude}, id, name, address: {address_street}, showOnMap, selected}) => {
-                        return {
-                            id,
-                            position: new google.maps.LatLng(latitude, longitude),
-                            showInfo: showOnMap,
-                            infoContent: infoContent(name, address_street),
-                            selected,
-                        }
-                    }) : []
-            }
+          position={position}
 
-      onMarkerClick={showOnMap}
-      onMarkerClose={hideOnMap}
-    />
-  </div>
-)
+          markers={doctors.length > 0 ?
+        doctors.map(({ geolocation: { latitude, longitude }, id, name, address: { address_street }, ui: { selected } }) => {
+          return {
+            id,
+            position: new google.maps.LatLng(latitude, longitude),
+            showInfo: selected,
+            infoContent: infoContent(name, address_street),
+          }
+        }) : []}
+
+          onMarkerClick={selectDoctor}
+          onMarkerClose={unselectDoctor}
+        />
+      </div>
+    )
+  }
+}
 
 DoctorsMap.propTypes = {
   className: PropTypes.string,
   doctors: PropTypes.arrayOf(PropTypes.object).isRequired,
   position: PropTypes.object.isRequired,
-  showOnMap: PropTypes.func,
-  hideOnMap: PropTypes.func,
+  selectDoctor: PropTypes.func,
+  unselectDoctor: PropTypes.func,
+  updateMyPosition: PropTypes.func,
 }
 
 

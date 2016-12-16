@@ -1,4 +1,10 @@
-import { API_URL_PAGEJAUNE_PRO, PAGEJAUNE_API_ID, PAGEJAUNE_API_KEY } from 'redux/constants'
+import {
+  API_URL_PAGEJAUNE_PRO,
+  PAGEJAUNE_API_ID,
+  PAGEJAUNE_API_KEY,
+  PAGEJAUNE_API_INFO_ID,
+  PAGEJAUNE_API_INFO_KEY
+} from 'redux/constants'
 import { pick, filter, random, toLower } from 'lodash'
 import { getSearch } from 'redux/search'
 import { getTimestamps } from 'redux/ui'
@@ -32,16 +38,17 @@ const fetchDoctors = ({ where, who }) => (dispatch, getState) => {
     .then(({ context: { results: { total_listing } }, ...raw }) => {
       if (total_listing > 0) {
         return raw.search_results.listings.map(
-          (doctor, i) => {
+          (doctor) => {
             return {
               id: doctor.position,
               name: doctor.merchant_name,
               address: { ...pick(doctor.inscriptions[0], 'address_street', 'address_zipcode', 'address_city') },
               geolocation: { ...pick(doctor.inscriptions[0], 'latitude', 'longitude') },
               contacts: doctor.inscriptions[0].contact_info,
-              showOnMap: false,
-              selected: i === 0,
               RAC: random(0, 100),
+              ui: {
+                selected: false,
+              },
             }
           })
       }
@@ -52,7 +59,20 @@ const fetchDoctors = ({ where, who }) => (dispatch, getState) => {
       (filters.RAC[0] < d.RAC && d.RAC < filters.RAC[1]) &&
       toLower(d.name).includes(toLower(filters.name))
     )))
-    .then(doctors => dispatch(setDoctors(doctors)))
+    .then((doctors) => {
+      dispatch(setDoctors(doctors))
+      return doctors
+    })
+    .then((doctors) => {
+      doctors.map(doctor =>
+        fetch(`${API_URL_PAGEJAUNE_PRO}/listings/by_mercant_id-01.json?app_id=${PAGEJAUNE_API_INFO_ID}&app_key=${PAGEJAUNE_API_INFO_KEY}`)
+          .then(raw => raw.json())
+          .then(({ photos }) => {
+            doctor.photo = photos[0].url
+            dispatch(setDoctor(doctor))
+          })
+      )
+    })
 }
 
 let timeout

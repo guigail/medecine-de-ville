@@ -1,17 +1,24 @@
+.all {
+  background: #eeeeee;
+}
 .filters {
   overflow: hidden;
   max-height: 100%;
-  padding: 0 1em;
+  padding: 0 3em;
   transition: max-height .5s ease-in;
 }
 
 .filtersHidden {
   overflow: hidden;
   max-height: 0;
-  padding: 0 1em;
+  padding: 0 3em;
   transition: max-height .5s ease-out;
 }
 
 .filtersButton {
   float: right;
+}
+
+.slider {
+  height: 50px;
 }

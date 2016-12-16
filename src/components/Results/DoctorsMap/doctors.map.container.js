@@ -1,6 +1,6 @@
 import { connect } from 'react-redux'
 import { getPosition } from 'redux/search'
-import { showOnMap, hideOnMap } from './doctors.map.actions'
+import { select, unselect, updateMyPosition } from './doctors.map.actions'
 import Component from './doctors.map'
 
 const mapStateToProps = (state, { doctors }) => {
@@ -13,8 +13,9 @@ const mapStateToProps = (state, { doctors }) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    showOnMap: (id, isCenter) => dispatch(showOnMap(id, isCenter)),
-    hideOnMap: id => dispatch(hideOnMap(id)),
+    selectDoctor: id => dispatch(select(id)),
+    unselectDoctor: id => dispatch(unselect(id)),
+    updateMyPosition: () => dispatch(updateMyPosition),
   }
 }
 

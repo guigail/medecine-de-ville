@@ -1,9 +1,6 @@
-import { selectDoctor, getDoctor } from 'redux/doctors'
-import { setSidebarPinned, getSidebarPinned } from 'redux/ui'
+import { selectDoctor, getDoctor, unselectDoctors } from 'redux/doctors'
 
-export const showInfo = id => (dispatch, getState) => {
+export const select = id => (dispatch, getState) => {
+  dispatch(unselectDoctors())
   dispatch(selectDoctor(getDoctor(getState(), id)))
-  if (!getSidebarPinned(getState())) {
-    dispatch(setSidebarPinned(true))
-  }
 }

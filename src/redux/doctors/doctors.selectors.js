@@ -2,10 +2,11 @@ import { find } from 'lodash'
 
 export const getDoctors = ({ doctors }) => doctors
 export const getDoctor = ({ doctors }, id) => find(doctors, { id })
+
 export const getSelected = ({ doctors }) => {
-  let doctor = find(doctors, { selected: true })
+  let doctor = find(doctors, { ui: { selected: true } })
   if (!doctor) {
-    doctor = {}
+    doctor = { id: -1 }
   }
   return doctor
 }

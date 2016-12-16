@@ -27,6 +27,7 @@ export const updatePosition = () => (dispatch) => {
       dispatch(setPosition({ lat: position.coords.latitude, lng: position.coords.longitude }))
     },
     (reason) => {
+      console.log(reason)
       dispatch(resetPosition())
     })
 }

@@ -11,10 +11,10 @@ export default (state = initState, { type, payload } = initAction) => {
       return state.map(d => ((d.id === payload.id) ? payload : d))
     case SELECT_DOCTOR:
       return state.map(d => ((d.id === payload.id) ?
-      { ...payload, selected: true, showOnMap: true } :
-      { ...d, selected: false, showOnMap: false }))
+      { ...payload, ui: { selected: true } } :
+      { ...d, ui: { selected: false } }))
     case UNSELECT_DOCTORS:
-      return state.map(d => ({ ...d, selected: false, showOnMap: false }))
+      return state.map(d => ({ ...d, ui: { selected: false } }))
     case RESET_DOCTORS:
       return initState
     default:

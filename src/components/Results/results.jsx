@@ -3,6 +3,7 @@ import loader from 'hoc-react-loader'
 import { ProgressBar } from 'react-google-maps'
 import DoctorsList from './DoctorsList'
 import DoctorsMap from './DoctorsMap'
+import MakeAnAppointment from './MakeAnAppointment'
 import Filters from './Filters'
 import styles from './results.style'
 
@@ -21,6 +22,7 @@ const Results = ({ doctors, searchIsActive }) => {
         <div className={styles.doctors_map}>
           <DoctorsMap doctors={doctors} />
         </div>
+        <MakeAnAppointment />
       </div>
     )
   }

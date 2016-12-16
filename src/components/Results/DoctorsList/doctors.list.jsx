@@ -1,14 +1,24 @@
 import React, { PropTypes } from 'react'
 import loader from 'hoc-react-loader'
-import { List, ListSubHeader } from 'react-toolbox'
+import { List, ListSubHeader, ListDivider } from 'react-toolbox'
 import Doctor from '../Doctor'
+import DoctorSummary from '../DoctorSummary'
 import styles from './doctors.list.style'
 
 const DoctorsList = ({ doctors, who }) => (
   <List className={styles.list} selectable>
     <ListSubHeader caption={who.join(', ')} />
-    {doctors.map(doctor =>
-      <Doctor className={styles.doctor} key={doctor.id} doctor={doctor} />)}
+
+    {doctors.map(doctor => <div key={doctor.id}>
+      <Doctor
+        className={styles.doctor}
+        doctor={doctor}
+      />
+      <DoctorSummary
+        className={styles.doctor}
+        doctor={doctor}
+      />
+    </div>)}
   </List>
 )
 

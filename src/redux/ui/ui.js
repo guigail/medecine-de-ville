@@ -3,6 +3,7 @@ import { SET_WHO, SET_WHERE } from 'redux/search'
 
 import {
   SET_DRAWER_ACTIVE, SET_DRAWER_PINNED,
+  SET_DIALOG_ACTIVE,
   SET_SIDEBAR_PINNED,
   SET_FILTERS_ACTIVE,
 } from './ui.actions'
@@ -16,6 +17,9 @@ export const initState = {
     pinned: false,
   },
   filters: {
+    active: false,
+  },
+  dialog: {
     active: false,
   },
   timestamps: {},
@@ -33,6 +37,8 @@ export default (state = initState, action = initAction) => {
       return { ...state, drawer: { pinned: action.payload } }
     case SET_SIDEBAR_PINNED:
       return { ...state, sidebar: { pinned: action.payload } }
+    case SET_DIALOG_ACTIVE:
+      return { ...state, dialog: { active: action.payload } }
     case FETCH_DOCTORS:
     case SET_WHERE:
     case SET_WHO:
