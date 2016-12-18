@@ -5,10 +5,10 @@ import { ProgressBar } from 'react-google-maps'
 import GoogleMap from './GoogleMap'
 import styles from './doctors.map.style'
 
-const infoContent = (name, address) =>
+const infoContent = (name, address, photo) =>
   <CardTitle
     theme={styles}
-    avatar="https://placeimg.com/80/80/animals"
+    avatar={photo}
     title={name}
     subtitle={address}
   />
@@ -31,12 +31,12 @@ class DoctorsMap extends React.Component {
           position={position}
 
           markers={doctors.length > 0 ?
-        doctors.map(({ geolocation: { latitude, longitude }, id, name, address: { address_street }, ui: { selected } }) => {
+        doctors.map(({ geolocation: { latitude, longitude }, id, name, photo, address: { address_street }, ui: { selected } }) => {
           return {
             id,
             position: new google.maps.LatLng(latitude, longitude),
             showInfo: selected,
-            infoContent: infoContent(name, address_street),
+            infoContent: infoContent(name, address_street, photo),
           }
         }) : []}
 

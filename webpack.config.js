@@ -51,7 +51,7 @@ function getRawCssLoaders(module, inject) {
 module.exports = {
   devServer: {
     quiet: false,
-    stats: { colors: true },
+    stats: {colors: true},
     proxy: {
       '/api_pj': {
         target: {
@@ -59,7 +59,7 @@ module.exports = {
           protocol: 'https:',
           port: 443,
         },
-        pathRewrite: { '^/api_pj': '' },
+        pathRewrite: {'^/api_pj': ''},
         changeOrigin: true,
         secure: false,
       }
@@ -95,6 +95,11 @@ module.exports = {
       exclude: [/global\.scss/],
       loaders: dev ? getRawCssLoaders(true, true) : [],
       loader: dev ? '' : ExtractTextPlugin.extract(getRawCssLoaders(true)),
+    }, {
+      // on chargera tous les formats d'images qui nous intéressent en tant
+      // que fichiers.
+      test: /\.(ico|jpe?g|png|gif)$/,
+      loaders: ['file?name=[path][name].[ext]&context=./src'],
     }],
   },
   postcss: () => [autoprefixer],

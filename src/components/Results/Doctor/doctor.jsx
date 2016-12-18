@@ -12,6 +12,7 @@ const Doctor = ({ id, doctor, selected, selectDoctor }) => (
     legend={`${doctor.address.address_street} - RAC [${doctor.RAC}]`}
     itemContent={
       <CardTitle
+        theme={styles}
         avatar={doctor.photo}
         title={doctor.name}
         subtitle={`${doctor.address.address_street} - RAC [${doctor.RAC}]`}

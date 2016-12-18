@@ -3,9 +3,10 @@ import loader from 'hoc-react-loader'
 import { withGoogleMap, GoogleMap, InfoWindow, Marker, Circle, ProgressBar } from 'react-google-maps'
 import { find } from 'lodash'
 import MarkerClusterer from 'react-google-maps/lib/addons/MarkerClusterer'
+import mypositionImg from 'file!./public/images/myposition.png'
 
 const iconPosition = {
-  url: '/src/images/markers/myposition.png',
+  url: {mypositionImg},
   size: new google.maps.Size(16, 16),
   origin: new google.maps.Point(0, 0),
   anchor: new google.maps.Point(8, 8),

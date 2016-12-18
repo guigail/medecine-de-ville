@@ -5,29 +5,29 @@ import {
   PAGEJAUNE_API_INFO_ID,
   PAGEJAUNE_API_INFO_KEY
 } from 'redux/constants'
-import { pick, filter, random, toLower } from 'lodash'
-import { getSearch } from 'redux/search'
-import { getTimestamps } from 'redux/ui'
-import { getFilters } from 'redux/filters'
+import {pick, filter, random, toLower} from 'lodash'
+import {getSearch} from 'redux/search'
+import {getTimestamps} from 'redux/ui'
+import {getFilters} from 'redux/filters'
 
 export const SET_DOCTOR = 'SET_DOCTOR'
-export const setDoctor = doctor => ({ type: SET_DOCTOR, payload: doctor })
+export const setDoctor = doctor => ({type: SET_DOCTOR, payload: doctor})
 
 export const SELECT_DOCTOR = 'SELECT_DOCTOR'
-export const selectDoctor = doctor => ({ type: SELECT_DOCTOR, payload: doctor })
+export const selectDoctor = doctor => ({type: SELECT_DOCTOR, payload: doctor})
 
 export const UNSELECT_DOCTORS = 'UNSELECT_DOCTORS'
-export const unselectDoctors = () => ({ type: UNSELECT_DOCTORS })
+export const unselectDoctors = () => ({type: UNSELECT_DOCTORS})
 
 export const RESET_DOCTORS = 'RESET_DOCTORS'
-export const resetDoctors = () => ({ type: RESET_DOCTORS })
+export const resetDoctors = () => ({type: RESET_DOCTORS})
 
 export const SET_DOCTORS = 'SET_DOCTORS'
-export const setDoctors = doctors => ({ type: SET_DOCTORS, payload: doctors })
+export const setDoctors = doctors => ({type: SET_DOCTORS, payload: doctors})
 
 export const FETCH_DOCTORS = 'FETCH_DOCTORS'
-const fetchDoctors = ({ where, who }) => (dispatch, getState) => {
-  dispatch({ type: FETCH_DOCTORS, timestamp: (new Date().getTime()) })
+const fetchDoctors = ({where, who}) => (dispatch, getState) => {
+  dispatch({type: FETCH_DOCTORS, timestamp: (new Date().getTime())})
 
   const filters = getFilters(getState())
 
@@ -35,15 +35,16 @@ const fetchDoctors = ({ where, who }) => (dispatch, getState) => {
   // Json parsing
     .then(raw => raw.json())
     // transform result
-    .then(({ context: { results: { total_listing } }, ...raw }) => {
+    .then(({context: {results: {total_listing}}, ...raw}) => {
       if (total_listing > 0) {
         return raw.search_results.listings.map(
           (doctor) => {
             return {
               id: doctor.position,
+              merchantId: doctor.merchant_id,
               name: doctor.merchant_name,
-              address: { ...pick(doctor.inscriptions[0], 'address_street', 'address_zipcode', 'address_city') },
-              geolocation: { ...pick(doctor.inscriptions[0], 'latitude', 'longitude') },
+              address: {...pick(doctor.inscriptions[0], 'address_street', 'address_zipcode', 'address_city')},
+              geolocation: {...pick(doctor.inscriptions[0], 'latitude', 'longitude')},
               contacts: doctor.inscriptions[0].contact_info,
               RAC: random(0, 100),
               ui: {
@@ -65,11 +66,11 @@ const fetchDoctors = ({ where, who }) => (dispatch, getState) => {
     })
     .then((doctors) => {
       doctors.map(doctor =>
-        fetch(`${API_URL_PAGEJAUNE_PRO}/listings/by_mercant_id-01.json?app_id=${PAGEJAUNE_API_INFO_ID}&app_key=${PAGEJAUNE_API_INFO_KEY}`)
+        fetch(`${API_URL_PAGEJAUNE_PRO}/listings/by_merchant_id-${doctor.merchantId}.json?app_id=${PAGEJAUNE_API_INFO_ID}&app_key=${PAGEJAUNE_API_INFO_KEY}`)
           .then(raw => raw.json())
-          .then(({ photos }) => {
-            doctor.photo = photos[0].url
-            dispatch(setDoctor(doctor))
+          .then(({photos}) => {
+              doctor.photo = photos ? photos[0].url : 'https://developers.google.com/experts/img/user/user-default.png'
+              dispatch(setDoctor(doctor))
           })
       )
     })

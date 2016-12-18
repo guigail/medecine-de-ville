@@ -25,7 +25,7 @@ class MakeAnAppointment extends React.Component {
   }
 
   render() {
-    const { active, closeDialog } = this.props
+    const { doctorSelected, active, closeDialog } = this.props
     return (
       <Dialog
         actions={this.actions}
@@ -36,7 +36,7 @@ class MakeAnAppointment extends React.Component {
       >
         <CardMedia
           aspectRatio="wide"
-          image="https://placeimg.com/800/450/nature"
+          image={doctorSelected.photo}
         />
         <DatePicker
           label="Quel jour ?"
