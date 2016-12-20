@@ -1,0 +1,219 @@
+{
+  "context": {
+    "search": {
+      "request_id": "800542782163098800"
+    }
+  },
+  "listing_id": "56519903000001C0001",
+  "merchant_id": "56519903",
+  "merchant_name": "Mammari Yassia",
+  "thumbnail_url": "http://static4.pagesjaunes.fr/media/vignette/AAASPD1DPJA1-C10001.gif",
+  "description": "Le Docteur Yassia Mammari vous reçoit au sein de son cabinet dans le 6ème arrondissement de Paris.\nElle propose des soins de médecine générale classique mais est aussi spécialisée en MEDECINE ESTHETIQUE.\nLe cabinet est doté d'un LASER DERNIERE GENERATION permettant les soins suivants :\n- épilation tous les types de peaux,\n- problèmes vasculaires,\n- hyper-pigmentation,\n- réjuvenation.\n\nVous pouvez consulter le site internet sur le lien suivant: http://medecine-esthetique-laser.fr/",
+  "photos": [
+    {
+      "url": "http://static4.pagesjaunes.fr/media/vignette/AAASPD1DPJA1-C10001.gif"
+    }
+  ],
+  "categories": [
+    {
+      "category_name": "Médecin généraliste"
+    }
+  ],
+  "schedules": {
+    "opening_days": [
+      {
+        "weekday": "Lundi",
+        "morning_opening_time": "08:30",
+        "morning_closing_time": "19:30"
+      },
+      {
+        "weekday": "Mardi",
+        "morning_opening_time": "08:30",
+        "morning_closing_time": "19:30"
+      },
+      {
+        "weekday": "Mercredi",
+        "morning_opening_time": "08:30",
+        "morning_closing_time": "19:30"
+      },
+      {
+        "weekday": "Jeudi",
+        "morning_opening_time": "08:30",
+        "morning_closing_time": "19:30"
+      }
+    ],
+    "opening_hours": "Mo-Th 08:30-19:30 ; PH off"
+  },
+  "transactionals_links": [
+    {
+      "type": "PRENDRE_RDV_INTERNE",
+      "url": "http://stat.pagesjaunes.fr/redirect?target=9Cl9bQlSOhDMHnIKHne8DD5xmNswKT8fLth_fuu5epOcLGUojpcRYFTX3ds7cOkBlhfhnL3DWkz9GL1CRuaEMw==&v=2.0&p1=1&p2=0&p3=&p4=CT-LT-PRENDRE-RDV&p5=FD&p6=800542782163098800&p7=56519903&p8="
+    }
+  ],
+  "inscriptions": [
+    {
+      "address_street": "174 bd St Germain",
+      "address_zipcode": "75006",
+      "address_city": "PARIS",
+      "address_district": "06",
+      "reviews": {
+        "total_reviews": 0,
+        "overall_review_rating": 0.0
+      },
+      "contact_infos": [
+        {
+          "contact_type": "MOBILE",
+          "contact_value": "06 86 15 86 45",
+          "no_direct_marketing": false
+        },
+        {
+          "contact_type": "TELEPHONE",
+          "contact_value": "01 43 27 45 61",
+          "no_direct_marketing": false
+        },
+        {
+          "contact_type": "AUTRE",
+          "contact_value": "01 43 27 45 61",
+          "no_direct_marketing": false
+        }
+      ],
+      "urls": {
+        "merchant_url": "http://stat.pagesjaunes.fr/redirect?target=9Cl9bQlSOhDMHnIKHne8DD5xmNswKT8fLth_fuu5epOcLGUojpcRYEHqlyY2fNoX&v=2.0&p1=1&p2=0&p3=&p4=DENOMINATION-EXACTE&p5=FD&p6=800542782163098800&p7=56519903&p8=",
+        "reviews_url": "http://stat.pagesjaunes.fr/redirect?target=9Cl9bQlSOhDMHnIKHne8DD5xmNswKT8fLth_fuu5epOcLGUojpcRYFTX3ds7cOkB7-DouwD0WmI8CJR-m9Pjow==&v=2.0&p1=1&p2=0&p3=&p4=BA-CONSULTER-AVIS&p5=FD&p6=800542782163098800&p7=56519903&p8=",
+        "map_url": "http://stat.pagesjaunes.fr/redirect?target=9Cl9bQlSOhDMHnIKHne8DD5xmNswKT8fLth_fuu5epOcLGUojpcRYFTX3ds7cOkBbvbnr3ftYOE=&v=2.0&p1=1&p2=0&p3=&p4=PLAN&p5=FD&p6=800542782163098800&p7=56519903&p8=",
+        "itinerary_url": "http://stat.pagesjaunes.fr/redirect?target=9Cl9bQlSOhDMHnIKHne8DD5xmNswKT8fLth_fuu5epOcLGUojpcRYFTX3ds7cOkBHr6DtGHzM4yGcMXoDO_ycA==&v=2.0&p1=1&p2=0&p3=&p4=ITI&p5=FD&p6=800542782163098800&p7=56519903&p8="
+      }
+    }
+  ],
+  "nearby_stations": [
+    {
+      "name": "saint germain des pres",
+      "distance": {
+        "type": "VOL_OISEAU",
+        "value": 29,
+        "unit": "METRE"
+      },
+      "transports": [
+        {
+          "type": "BUS",
+          "lines": [
+            "39",
+            "86",
+            "95",
+            "N02",
+            "N12",
+            "N13"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "saint-germain-des-près",
+      "distance": {
+        "type": "VOL_OISEAU",
+        "value": 116,
+        "unit": "METRE"
+      },
+      "transports": [
+        {
+          "type": "METRO",
+          "lines": [
+            "4"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "bonaparte-saint germain",
+      "distance": {
+        "type": "VOL_OISEAU",
+        "value": 197,
+        "unit": "METRE"
+      },
+      "transports": [
+        {
+          "type": "BUS",
+          "lines": [
+            "87",
+            "96"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "mabillon",
+      "distance": {
+        "type": "VOL_OISEAU",
+        "value": 263,
+        "unit": "METRE"
+      },
+      "transports": [
+        {
+          "type": "METRO",
+          "lines": [
+            "10"
+          ]
+        }
+      ]
+    },
+    {
+      "name": "jacob",
+      "distance": {
+        "type": "VOL_OISEAU",
+        "value": 276,
+        "unit": "METRE"
+      },
+      "transports": [
+        {
+          "type": "BUS",
+          "lines": [
+            "39",
+            "95",
+            "N12",
+            "N13"
+          ]
+        }
+      ]
+    }
+  ],
+  "b2b": {
+    "company_details": {
+      "siren": "820424174",
+      "head_office_address": {
+        "address_street_number": "174",
+        "address_street": "bd St Germain",
+        "address_zipcode": "75006",
+        "address_city": "PARIS",
+        "address_district": "06"
+      },
+      "numbers_of_employees": "0 salarié",
+      "number_of_businesses": 0,
+      "associated_names": [
+        "Mammari Yassia"
+      ]
+    },
+    "business_details": {
+      "siret": "82042417400010",
+      "naf_code": "8621Z",
+      "number_of_employees": "0 salarié",
+      "head_office": true
+    }
+  },
+  "healthcare": {
+    "government_regulation_type": "Conventionné Secteur 1",
+    "education": [
+      "Diplôme de médecine général."
+    ],
+    "spoken_languages": [
+      "Français",
+      "Anglais",
+      "Arabe"
+    ],
+    "specialisms": [
+      "Médecin esthétique"
+    ],
+    "practical_informations": {
+      "is_health_insurance_card_accepted": true
+    }
+  }
+}

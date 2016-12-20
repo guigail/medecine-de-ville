@@ -1,5 +1,6 @@
+import { update } from 'lodash'
 import { FETCH_DOCTORS } from 'redux/doctors'
-import { SET_WHO, SET_WHERE } from 'redux/search'
+import { SET_WHO, SET_WHERE, SET_SEARCH } from 'redux/search'
 
 import {
   SET_DRAWER_ACTIVE, SET_DRAWER_PINNED,
@@ -17,12 +18,12 @@ export const initState = {
     pinned: false,
   },
   filters: {
-    active: false,
+    active: true,
   },
   dialog: {
     active: false,
   },
-  timestamps: {},
+  timestamps: { fetch: new Date().getTime(), touch: new Date().getTime()},
 }
 
 export const initAction = { type: 'UNKNOWN' }
@@ -40,10 +41,11 @@ export default (state = initState, action = initAction) => {
     case SET_DIALOG_ACTIVE:
       return { ...state, dialog: { active: action.payload } }
     case FETCH_DOCTORS:
+      return update(state, 'timestamps.fetch', () => new Date().getTime())
     case SET_WHERE:
     case SET_WHO:
-      if (!action.payload) return state
-      return { ...state, timestamps: { [action.type]: action.payload } }
+    case SET_SEARCH:
+      return update(state, 'timestamps.touch', () => new Date().getTime())
     default:
       return state
   }

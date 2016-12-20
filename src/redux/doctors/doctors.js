@@ -1,3 +1,4 @@
+import { update } from 'lodash'
 import { SET_DOCTORS, RESET_DOCTORS, SET_DOCTOR, SELECT_DOCTOR, UNSELECT_DOCTORS } from './doctors.actions'
 
 export const initState = []
@@ -10,11 +11,9 @@ export default (state = initState, { type, payload } = initAction) => {
     case SET_DOCTOR:
       return state.map(d => ((d.id === payload.id) ? payload : d))
     case SELECT_DOCTOR:
-      return state.map(d => ((d.id === payload.id) ?
-      { ...payload, ui: { selected: true } } :
-      { ...d, ui: { selected: false } }))
+      return state.map(d => update(d, 'ui.selected', () => d.id === payload.id))
     case UNSELECT_DOCTORS:
-      return state.map(d => ({ ...d, ui: { selected: false } }))
+      return update(state, 'ui.selected', () => false)
     case RESET_DOCTORS:
       return initState
     default:

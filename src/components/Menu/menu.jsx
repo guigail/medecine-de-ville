@@ -7,7 +7,7 @@ const Menu = ({ active, pinned, toggleDrawerActive, toggleDrawerPinned }) => (
     pinned={pinned}
     onOverlayClick={toggleDrawerActive}
   >
-    <div><IconButton icon="close" onClick={toggleDrawerPinned} /></div>
+    <div><IconButton icon="menu" onClick={toggleDrawerActive} /></div>
   </NavDrawer>
 )
 

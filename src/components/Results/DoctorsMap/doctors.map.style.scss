@@ -1,3 +1,16 @@
+.info {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  padding: 1em 0;
+  h1 {
+    margin-left: 1em;
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis
+  }
+}
+
 .cardTitle {
   padding: 0 !important;
 }

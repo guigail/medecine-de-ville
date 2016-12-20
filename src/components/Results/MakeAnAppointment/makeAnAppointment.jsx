@@ -1,5 +1,8 @@
 import React, { PropTypes } from 'react'
-import { Dialog, DatePicker, TimePicker, CardMedia } from 'react-toolbox'
+import moment from 'moment'
+import loader from 'hoc-react-loader'
+import { Dialog, DatePicker, TimePicker, CardMedia, ProgressBar } from 'react-toolbox'
+import InfiniteCalendar from 'react-infinite-calendar'
 import styles from './makeAnAppointment.style'
 
 class MakeAnAppointment extends React.Component {
@@ -26,24 +29,28 @@ class MakeAnAppointment extends React.Component {
 
   render() {
     const { doctorSelected, active, closeDialog } = this.props
+    const today = new Date()
+    const minDate = new Date()
+    const maxDate = moment().add(1, 'year')
     return (
       <Dialog
         actions={this.actions}
         active={active}
         onEscKeyDown={closeDialog}
         onOverlayClick={closeDialog}
-        title="Prendre un rendez-vous"
+        title={`Prendre un rendez-vous avec ${doctorSelected.name}`}
       >
-        <CardMedia
-          aspectRatio="wide"
-          image={doctorSelected.photo}
-        />
-        <DatePicker
-          label="Quel jour ?"
-          locale="fr"
-          autoOk
-          onChange={date => this.state.date.setDate(date.getDate())}
-          value={this.state.date}
+        <p>
+          {doctorSelected.description}
+        </p>
+        <InfiniteCalendar
+          width={'100%'}
+          height={300}
+          selectedDate={today}
+          disabledDays={doctorSelected.closedDays}
+          min={minDate}
+          minDate={minDate}
+          max={maxDate}
         />
         <TimePicker label="Quelle heure ?" onChange={time => this.state.date.setTime(time)} value={this.state.date}/>
       </Dialog>)
@@ -57,4 +64,7 @@ MakeAnAppointment.propTypes = {
   closeDialog: PropTypes.func.isRequired,
 }
 
-export default MakeAnAppointment
+export default loader(MakeAnAppointment, {
+  wait: ['doctorSelected'],
+  LoadingIndicator: () => <ProgressBar type="circular" mode="indeterminate" multicolor />,
+})

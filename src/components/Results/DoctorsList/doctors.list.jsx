@@ -5,26 +5,28 @@ import Doctor from '../Doctor'
 import DoctorSummary from '../DoctorSummary'
 import styles from './doctors.list.style'
 
-const DoctorsList = ({ doctors, who }) => (
+const DoctorsList = ({ doctors, what }) => (
   <List className={styles.list} selectable>
-    <ListSubHeader caption={who.join(', ')} />
+    <ListSubHeader caption={what.join(', ')}/>
 
-    {doctors.map(doctor => <div key={doctor.id}>
-      <Doctor
-        className={styles.doctor}
-        doctor={doctor}
-      />
-      <DoctorSummary
-        className={styles.doctor}
-        doctor={doctor}
-      />
-    </div>)}
+    {doctors.map(doctor =>
+      <div key={doctor.id}>
+        <Doctor
+          className={styles.doctor}
+          doctor={doctor}
+        />
+        <DoctorSummary
+          className={styles.doctor}
+          doctor={doctor}
+        />
+      </div>
+    )}
   </List>
 )
 
 DoctorsList.propTypes = {
   doctors: PropTypes.arrayOf(PropTypes.object).isRequired,
-  who: PropTypes.arrayOf(PropTypes.string),
+  what: PropTypes.arrayOf(PropTypes.string),
 }
 
 export default loader(DoctorsList, { wait: false })

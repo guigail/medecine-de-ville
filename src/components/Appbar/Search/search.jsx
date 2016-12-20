@@ -2,19 +2,19 @@ import React, { PropTypes } from 'react'
 import { IconButton, FontIcon } from 'react-toolbox'
 import styles from './search.style'
 
-const Search = ({ className, where, who, onChangeWhere, onChangeWho, updatePosition }) => (
+const Search = ({ className, where, what, onChangeWhere, onChangeWhat, updatePosition }) => (
   <div className={`${styles.search} ${className}`}>
-    {(!where || !who) && <div className={styles.label}><FontIcon value="search" />Vous recherchez</div>}
+    {(!where || !what) && <div className={styles.label}><FontIcon value="search" />Vous recherchez</div>}
     <div className={styles.box}>
       <input
-        value={who}
+        value={what}
         placeholder="Qui ?"
-        onChange={e => onChangeWho(e)}
+        onChange={e => onChangeWhat(e)}
       />
     </div>
     <div className={styles.box}>
       <input value={where} placeholder="Où ?" onChange={e => onChangeWhere(e)} />
-      <IconButton icon="my_location" onClick={updatePosition} />
+      <IconButton icon="my_location" onClick={updatePosition} disabled />
     </div>
   </div>
 )

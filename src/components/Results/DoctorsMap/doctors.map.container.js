@@ -1,10 +1,12 @@
 import { connect } from 'react-redux'
 import { getPosition } from 'redux/search'
+import { getVisible } from 'redux/doctors'
 import { select, unselect, updateMyPosition } from './doctors.map.actions'
 import Component from './doctors.map'
 
-const mapStateToProps = (state, { doctors }) => {
+const mapStateToProps = (state) => {
   const position = getPosition(state)
+  const doctors = getVisible(state)
   return {
     doctors,
     position,

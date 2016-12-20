@@ -1,5 +1,4 @@
-export const API_URL_PAGEJAUNE_PRO = '/api_pj/pros'
-//export const API_URL_PAGEJAUNE_PRO = 'https://193.252.138.46/pros'
+export const API_URL_PAGEJAUNE_PRO = 'https://api.apipagesjaunes.fr/pros'
 
 export const DOCTORS_LIST_TYPE = {
   MEDECIN: 'Médecin généraliste',

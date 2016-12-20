@@ -2,7 +2,7 @@ export const SET_WHERE = 'SET_WHERE'
 export const setWhere = where => ({ type: SET_WHERE, payload: where })
 
 export const SET_WHO = 'SET_WHO'
-export const setWho = who => ({ type: SET_WHO, payload: who })
+export const setWhat = what => ({ type: SET_WHO, payload: what })
 
 export const SET_POSITION = 'SET_POSITION'
 export const setPosition = position => ({ type: SET_POSITION, payload: position })
@@ -27,7 +27,6 @@ export const updatePosition = () => (dispatch) => {
       dispatch(setPosition({ lat: position.coords.latitude, lng: position.coords.longitude }))
     },
     (reason) => {
-      console.log(reason)
       dispatch(resetPosition())
     })
 }

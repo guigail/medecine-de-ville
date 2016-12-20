@@ -4,19 +4,14 @@ import loader from 'hoc-react-loader'
 import { ProgressBar } from 'react-google-maps'
 import GoogleMap from './GoogleMap'
 import styles from './doctors.map.style'
+import AvatarDoctor from '../../UI/AvatarDoctor'
 
 const infoContent = (name, address, photo) =>
-  <CardTitle
-    theme={styles}
-    avatar={photo}
-    title={name}
-    subtitle={address}
-  />
+  <div className={styles.info}><AvatarDoctor name={name} photo={photo} /><h1>{name}</h1></div>
 
 class DoctorsMap extends React.Component {
   constructor(props) {
     super(props)
-    console.log(props)
     this.props.updateMyPosition()
   }
 
@@ -31,7 +26,7 @@ class DoctorsMap extends React.Component {
           position={position}
 
           markers={doctors.length > 0 ?
-        doctors.map(({ geolocation: { latitude, longitude }, id, name, photo, address: { address_street }, ui: { selected } }) => {
+        doctors.map(({ geolocation: { latitude, longitude }, id, name, photo, address: { address_street }, ui: { selected, visible } }) => {
           return {
             id,
             position: new google.maps.LatLng(latitude, longitude),

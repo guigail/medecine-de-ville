@@ -1,5 +1,5 @@
 import { PUSH } from 'redux-little-router'
-import { setWhere, setWho, updatePosition } from 'redux/search'
+import { setWhere, setWhat, updatePosition } from 'redux/search'
 import { lazyFetchDoctors, unselectDoctors } from 'redux/doctors'
 import { getTitle } from 'redux/router'
 
@@ -20,8 +20,8 @@ export const changeWhere = where => (dispatch) => {
   dispatch(lazyFetchDoctors())
 }
 
-export const changeWho = who => (dispatch) => {
-  dispatch(setWho([who]))
+export const changeWhat = what => (dispatch) => {
+  dispatch(setWhat([what]))
   dispatch(lazyFetchDoctors())
 }
 

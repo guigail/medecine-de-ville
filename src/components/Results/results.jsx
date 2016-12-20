@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react'
 import loader from 'hoc-react-loader'
-import { ProgressBar } from 'react-google-maps'
+import { ProgressBar } from 'react-toolbox'
 import DoctorsList from './DoctorsList'
 import DoctorsMap from './DoctorsMap'
 import MakeAnAppointment from './MakeAnAppointment'
@@ -15,12 +15,12 @@ const Results = ({ doctors, searchIsActive }) => {
         <div className={styles.doctors_list}>
           <Filters />
           {doctors.length > 0 ?
-            <DoctorsList doctors={doctors} /> :
+            <DoctorsList /> :
             <h1>Aucun résultat</h1>
           }
         </div>
         <div className={styles.doctors_map}>
-          <DoctorsMap doctors={doctors} />
+          <DoctorsMap />
         </div>
         <MakeAnAppointment />
       </div>

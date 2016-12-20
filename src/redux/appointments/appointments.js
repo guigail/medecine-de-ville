@@ -19,13 +19,12 @@ export default (state = initState, { type, payload } = initAction) => {
     case SET_APPOINTMENTS:
       return payload
     case SET_APPOINTMENT:
-      return state.map(a => (a.id == payload.id) ? payload : a)
+      return state.map((a) => (a.id === payload.id) ? payload : a)
     case ADD_APPOINTMENT:
       state.push({ ...payload, id: state.length + 1 })
       return state
     case DELETE_APPOINTMENT:
-      console.log(payload)
-      return remove(state, (a) => a.idDoctor != payload.idDoctor)
+      return remove(state, a => a.idDoctor !== payload.idDoctor)
     default:
       return state
   }

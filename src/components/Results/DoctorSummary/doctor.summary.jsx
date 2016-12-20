@@ -11,6 +11,12 @@ const DoctorSummary = ({ doctor, haveAppointment, selected, showAppointment }) =
     ripple={false}
     itemContent={
       <List ripple={false}>
+        <ListItem
+          key="categorie"
+          ripple={false}
+          caption={doctor.categorie}
+          leftIcon="person"
+        />
         { doctor.contacts && doctor.contacts.map(({ contact_value, contact_type }, i) =>
           <ListItem
             key={i}

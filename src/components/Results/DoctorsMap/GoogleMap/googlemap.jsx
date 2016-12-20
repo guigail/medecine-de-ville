@@ -3,24 +3,26 @@ import loader from 'hoc-react-loader'
 import { withGoogleMap, GoogleMap, InfoWindow, Marker, Circle, ProgressBar } from 'react-google-maps'
 import { find } from 'lodash'
 import MarkerClusterer from 'react-google-maps/lib/addons/MarkerClusterer'
-import mypositionImg from 'file!./public/images/myposition.png'
+import myposition from './images/markers/myposition.png'
+import doctor from './images/markers/doctor.png'
+import doctor_selected from './images/markers/doctor.selected.png'
 
 const iconPosition = {
-  url: {mypositionImg},
+  url: `${myposition}`,
   size: new google.maps.Size(16, 16),
   origin: new google.maps.Point(0, 0),
   anchor: new google.maps.Point(8, 8),
 }
 
 const iconDoctor = {
-  url: '/src/images/markers/doctor.png',
+  url: `${doctor}`,
   size: new google.maps.Size(24, 34),
   origin: new google.maps.Point(0, 0),
   anchor: new google.maps.Point(0, 17),
 }
 
 const iconDoctorSelected = {
-  url: '/src/images/markers/doctor.selected.png',
+  url: `${doctor_selected}`,
   size: new google.maps.Size(24, 34),
   origin: new google.maps.Point(0, 0),
   anchor: new google.maps.Point(0, 17),
@@ -32,33 +34,30 @@ const centerOfSelection = (markers, defaultPosition) => {
 }
 
 const GoogleMapMarker = withGoogleMap(({ markers, position, onMarkerClick, onMarkerClose }) => (
-  <GoogleMap defaultZoom={14} center={centerOfSelection(markers, position)}>
-    <MarkerClusterer
-      averageCenter
-      gridSize={30}
-      imagePath="/src/images/markers/cluster/doctors"
-    >
-      {markers.map(({ id, position, showInfo, infoContent }) => (
-        <Marker
-          key={id}
-          position={position}
-          icon={showInfo ? iconDoctorSelected : iconDoctor}
-          onClick={() => onMarkerClick(id, false)}
-        >
-          {showInfo &&
-          (<InfoWindow onCloseClick={() => onMarkerClose(id)}>
-            <div>{infoContent}</div>
-          </InfoWindow>)
-          }
-        </Marker>
-      ))}
-    </MarkerClusterer>
+  <GoogleMap defaultZoom={12} center={centerOfSelection(markers, position)}>
+
+    {markers.map(({ id, position, showInfo, infoContent }) => (
+      <Marker
+        key={id}
+        position={position}
+        icon={showInfo ? iconDoctorSelected : iconDoctor}
+        onClick={() => onMarkerClick(id, false)}
+        opacity={showInfo ? 1 : 0.7}
+      >
+        {showInfo &&
+        (<InfoWindow onCloseClick={() => onMarkerClose(id)}>
+          <div>{infoContent}</div>
+        </InfoWindow>)
+        }
+      </Marker>
+    ))}
 
     {position &&
     <Marker
       key="POSITION"
       position={position}
       icon={iconPosition}
+      animation={google.maps.Animation.BOUNCE}
     /> }
     {position &&
     <Circle
