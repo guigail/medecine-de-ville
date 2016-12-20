@@ -6,8 +6,8 @@ import GoogleMap from './GoogleMap'
 import styles from './doctors.map.style'
 import AvatarDoctor from '../../UI/AvatarDoctor'
 
-const infoContent = (name, address, photo) =>
-  <div className={styles.info}><AvatarDoctor name={name} photo={photo} /><h1>{name}</h1></div>
+const infoContent = (name, address, photo, RAC) =>
+  <div className={styles.info}><AvatarDoctor name={name} photo={photo} /><h1>{name}</h1><h2>{RAC} €</h2></div>
 
 class DoctorsMap extends React.Component {
   constructor(props) {
@@ -26,12 +26,12 @@ class DoctorsMap extends React.Component {
           position={position}
 
           markers={doctors.length > 0 ?
-        doctors.map(({ geolocation: { latitude, longitude }, id, name, photo, address: { address_street }, ui: { selected, visible } }) => {
+        doctors.map(({ geolocation: { latitude, longitude }, id, name, photo, RAC, address: { address_street }, ui: { selected, visible } }) => {
           return {
             id,
             position: new google.maps.LatLng(latitude, longitude),
             showInfo: selected,
-            infoContent: infoContent(name, address_street, photo),
+            infoContent: infoContent(name, address_street, photo, RAC),
           }
         }) : []}
 

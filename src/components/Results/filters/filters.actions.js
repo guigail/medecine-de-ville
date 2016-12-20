@@ -1,15 +1,15 @@
 import { setFilterRAC, setFilterName, getFilters } from 'redux/filters'
-import { lazyFetchDoctors } from 'redux/doctors'
+import { filterDoctors } from 'redux/doctors'
 import { setFiltersActive, getFiltersActive } from 'redux/ui'
 
 export const applyFiltersRAC = RAC => (dispatch) => {
   dispatch(setFilterRAC(RAC))
-  dispatch(lazyFetchDoctors())
+  dispatch(filterDoctors())
 }
 
 export const applyFiltersName = name => (dispatch) => {
   dispatch(setFilterName(name))
-  dispatch(lazyFetchDoctors())
+  dispatch(filterDoctors())
 }
 
 export const toggleFilters = () => (dispatch, getState) =>
