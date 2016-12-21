@@ -7,7 +7,7 @@ import { makeAnAppointment, cancelAnAppointment, closeDialog } from './makeAnApp
 
 const mapStateToProps = (state) => {
   const doctorSelected = getSelected(state)
-  const appointment = getAppointmentByDoctor(state, doctorSelected.id)
+  const appointment = getAppointmentByDoctor(state, doctorSelected.merchantId)
   const active = getDialogActive(state)
 
   return {
@@ -19,7 +19,7 @@ const mapStateToProps = (state) => {
 
 const mapDispatchToProps = (dispatch) => {
   return {
-    makeAnAppointment: (idDoctor, date, time) => dispatch(makeAnAppointment(idDoctor, date, time)),
+    makeAnAppointment: (date) => dispatch(makeAnAppointment(date)),
     closeDialog: () => dispatch(closeDialog()),
     cancelAnAppointment: appointment => dispatch(cancelAnAppointment(appointment)),
   }

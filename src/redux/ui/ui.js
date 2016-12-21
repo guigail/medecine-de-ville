@@ -7,6 +7,7 @@ import {
   SET_DIALOG_ACTIVE,
   SET_SIDEBAR_PINNED,
   SET_FILTERS_ACTIVE,
+  SET_MESSAGES_ACTIVE,
 } from './ui.actions'
 
 export const initState = {
@@ -21,6 +22,9 @@ export const initState = {
     active: true,
   },
   dialog: {
+    active: false,
+  },
+  messages: {
     active: false,
   },
   timestamps: { fetch: new Date().getTime(), touch: new Date().getTime()},
@@ -40,6 +44,8 @@ export default (state = initState, action = initAction) => {
       return { ...state, sidebar: { pinned: action.payload } }
     case SET_DIALOG_ACTIVE:
       return { ...state, dialog: { active: action.payload } }
+    case SET_MESSAGES_ACTIVE:
+      return { ...state, messages: { active: action.payload } }
     case FETCH_DOCTORS:
       return update(state, 'timestamps.fetch', () => new Date().getTime())
     case SET_WHERE:

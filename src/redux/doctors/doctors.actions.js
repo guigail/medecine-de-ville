@@ -111,8 +111,8 @@ export const lazyFetchDoctors = () => (dispatch, getState) => {
   }
 
   const time = (new Date().getTime())
-  const touchTimer = (timestamps.touch + 2000) - time
-  const fetchTimer = (timestamps.fetch + 10000) - time
+  const touchTimer = (timestamps.touch + 1000) - time
+  const fetchTimer = (timestamps.fetch + 1000) - time
 
   // Research if user didn't write for 0.5s or last search was 1s ago
   if (touchTimer <= 0 || fetchTimer <= 0) {

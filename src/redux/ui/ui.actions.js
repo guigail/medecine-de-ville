@@ -12,3 +12,6 @@ export const setFiltersActive = active => ({ type: SET_FILTERS_ACTIVE, payload: 
 
 export const SET_DIALOG_ACTIVE = 'SET_DIALOG_ACTIVE'
 export const setDialogActive = active => ({ type: SET_DIALOG_ACTIVE, payload: active })
+
+export const SET_MESSAGES_ACTIVE = 'SET_MESSAGES_ACTIVE'
+export const setMessagesActive = active => ({ type: SET_MESSAGES_ACTIVE, payload: active })

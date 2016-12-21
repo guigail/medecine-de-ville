@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react'
 import loader from 'hoc-react-loader'
-import { List, ListSubHeader, ListDivider } from 'react-toolbox'
+import { List, ListSubHeader, ListDivider, ProgressBar } from 'react-toolbox'
 import Doctor from '../Doctor'
 import DoctorSummary from '../DoctorSummary'
 import styles from './doctors.list.style'
@@ -29,4 +29,7 @@ DoctorsList.propTypes = {
   what: PropTypes.arrayOf(PropTypes.string),
 }
 
-export default loader(DoctorsList, { wait: false })
+export default loader(DoctorsList, {
+  wait: ['doctors'],
+  LoadingIndicator: () => <ProgressBar type="circular" mode="indeterminate" multicolor />,
+})

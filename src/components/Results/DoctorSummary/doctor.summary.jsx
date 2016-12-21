@@ -4,7 +4,7 @@ import { List, ListItem, Tooltip, Button } from 'react-toolbox'
 import { getIconByContactType } from 'redux/doctors'
 import styles from './doctor.summary.style'
 
-const DoctorSummary = ({ doctor, haveAppointment, selected, showAppointment }) => (
+const DoctorSummary = ({ doctor, appointment, selected, showAppointment }) => (
   <ListItem
     className={`${styles.selected} ${!selected ? styles.notSelected : ''}`}
     themes={styles}
@@ -28,14 +28,15 @@ const DoctorSummary = ({ doctor, haveAppointment, selected, showAppointment }) =
         <ListItem
           key="makeAnAppointment"
           ripple={false}
-          itemContent={
+          itemContent={!appointment ?
             <Button
               icon="date_range"
               label="Prendre rendez-vous"
               flat
               primary
-              onClick={ () => showAppointment(doctor.id)}
-            />
+              onClick={() => showAppointment()}
+            /> :
+            <h2>Rendez vous le {appointment.date.format('DD/MM/YYYY')} à {appointment.date.format('HH:mm')}</h2>
           }
         />
       </List>
@@ -45,7 +46,7 @@ const DoctorSummary = ({ doctor, haveAppointment, selected, showAppointment }) =
 
 DoctorSummary.propTypes = {
   doctor: PropTypes.object.isRequired,
-  haveAppointment: PropTypes.bool,
+  appointment: PropTypes.object,
   selected: PropTypes.bool,
   showAppointment: PropTypes.func,
 }

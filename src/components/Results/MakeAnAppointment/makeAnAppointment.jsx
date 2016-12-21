@@ -5,15 +5,28 @@ import { Dialog, DatePicker, TimePicker, CardMedia, ProgressBar } from 'react-to
 import InfiniteCalendar from 'react-infinite-calendar'
 import styles from './makeAnAppointment.style'
 
+const locale = {
+  name: 'fr',
+  headerFormat: 'dddd, Do MMM',
+  months: ["Janvier", "Fevrier", "Mars", "Avril", "Mai", "Juin", "Juillet", "Aout", "Septembre", "Octobre", "Novembre", "Decembre"],
+  monthsShort: ["Janv", "Fevr", "Mars", "Avr", "Mai", "Juin", "Juil", "Aout", "Sept", "Oct", "Nov", "Dec"],
+  weekdays: ["Dimanche", "Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi"],
+  weekdaysShort: ["Dim", "Lun", "Mar", "Mer", "Jeu", "Ven", "Sam"],
+  blank: 'Aucune date selectionnee',
+  todayLabel: {
+    long: 'Aujourd\'hui',
+    short: 'Auj.'
+  }
+}
+
 class MakeAnAppointment extends React.Component {
 
   constructor(props) {
     super(props)
 
-    const { doctorSelected, closeDialog, makeAnAppointment } = this.props
-
+    const { closeDialog, makeAnAppointment } = this.props
     this.state = {
-      date: new Date(),
+      date: moment(),
       time: new Date(),
     }
 
@@ -22,16 +35,14 @@ class MakeAnAppointment extends React.Component {
       {
         label: 'Prendre rendez-vous',
         primary: true,
-        onClick: () => makeAnAppointment(doctorSelected.id, this.state.date, this.state.time),
+        onClick: () => makeAnAppointment(this.state.date),
       },
     ]
   }
 
   render() {
     const { doctorSelected, active, closeDialog } = this.props
-    const today = new Date()
-    const minDate = new Date()
-    const maxDate = moment().add(1, 'year')
+
     return (
       <Dialog
         actions={this.actions}
@@ -46,13 +57,30 @@ class MakeAnAppointment extends React.Component {
         <InfiniteCalendar
           width={'100%'}
           height={300}
-          selectedDate={today}
+          selectedDate={moment()}
           disabledDays={doctorSelected.closedDays}
-          min={minDate}
-          minDate={minDate}
-          max={maxDate}
+          min={moment()}
+          minDate={moment()}
+          max={moment().add(1, 'year')}
+          locale={locale}
+          keyboardSupport={true}
+          showHeader={false}
+          onSelect={(date) => {
+            this.state.date.day(date.day())
+            this.state.date.month(date.month())
+            this.state.date.year(date.year())
+          }}
         />
-        <TimePicker label="Quelle heure ?" onChange={time => this.state.date.setTime(time)} value={this.state.date}/>
+        <TimePicker
+          theme={styles}
+          label="Quelle heure ?"
+          value={this.state.time}
+          onChange={(time) => {
+            this.state.time.setTime(time)
+            this.state.date.hours(time.getHours())
+            this.state.date.minutes(time.getMinutes())
+          }}
+        />
       </Dialog>)
   }
 }
@@ -66,5 +94,5 @@ MakeAnAppointment.propTypes = {
 
 export default loader(MakeAnAppointment, {
   wait: ['doctorSelected'],
-  LoadingIndicator: () => <ProgressBar type="circular" mode="indeterminate" multicolor />,
+  LoadingIndicator: () => <ProgressBar type="circular" mode="indeterminate" multicolor/>,
 })

@@ -1,10 +1,10 @@
 import React from 'react'
 import { AbsoluteFragment, Fragment } from 'redux-little-router'
-import { Layout, Panel } from 'react-toolbox';
+import { Layout, Panel } from 'react-toolbox'
 import Results from './Results'
 import Appbar from './Appbar'
 import Menu from './Menu'
-import Infobar from './Infobar'
+import Messages from './Messages'
 
 const App = () => {
   return (
@@ -12,9 +12,9 @@ const App = () => {
       <Menu />
       <Panel>
         <Appbar />
-        <AbsoluteFragment forRoute="/" children={<Results />}/>
+        <AbsoluteFragment forRoute="/" children={<Results />} />
       </Panel>
-      <Infobar />
+      <Messages />
     </Layout>
   )
 }
