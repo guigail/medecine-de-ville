@@ -27,7 +27,10 @@ export const initState = {
   messages: {
     active: false,
   },
-  timestamps: { fetch: new Date().getTime(), touch: new Date().getTime()},
+  timestamps: {
+    fetch: new Date().getTime(),
+    touch: new Date().getTime(),
+  },
 }
 
 export const initAction = { type: 'UNKNOWN' }

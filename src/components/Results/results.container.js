@@ -1,25 +1,17 @@
 import { connect } from 'react-redux'
 import { getDoctors } from 'redux/doctors'
-import { getSearch, isActive } from 'redux/search'
+import { isActive } from 'redux/search'
 import { toggleSidebarPinned } from '../Infobar/infobar.actions'
 import Component from './results'
 
-const mapStateToProps = (state) => {
-  const doctors = getDoctors(state)
-  const searchIsActive = isActive(state)
+const mapStateToProps = state => ({
+  doctors: getDoctors(state),
+  position: state.position,
+  searchIsActive: isActive(state),
+})
 
-  return {
-    doctors,
-    position: state.position,
-    searchIsActive,
-  }
-}
-
-const mapDispatchToProps = (dispatch) => {
-  return {
-    toggleSidebarPinned: () => dispatch(toggleSidebarPinned()),
-  }
-}
-
+const mapDispatchToProps = dispatch => ({
+  toggleSidebarPinned: () => dispatch(toggleSidebarPinned()),
+})
 
 export default connect(mapStateToProps, mapDispatchToProps)(Component)

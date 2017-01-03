@@ -1,4 +1,10 @@
-import { SET_FILTERS, SET_FILTER_NAME, SET_FILTER_RAC, DELETE_FILTERS } from './filters.actions'
+import {
+  SET_FILTERS,
+  SET_FILTER_NAME,
+  SET_FILTER_RAC,
+  DELETE_FILTERS,
+} from './filters.actions'
+
 export const initState = { RAC: [0, 100], name: '' }
 export const initAction = { type: 'UNKNOWN' }
 

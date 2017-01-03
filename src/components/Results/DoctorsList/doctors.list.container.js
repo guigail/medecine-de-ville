@@ -3,13 +3,9 @@ import { getVisible } from 'redux/doctors'
 import { getWhat } from 'redux/search'
 import Component from './doctors.list'
 
-const mapStateToProps = (state) => {
-  const doctors = getVisible(state)
-  const what = getWhat(state)
-  return {
-    doctors,
-    what,
-  }
-}
+const mapStateToProps = state => ({
+  doctors: getVisible(state),
+  what: getWhat(state),
+})
 
 export default connect(mapStateToProps)(Component)

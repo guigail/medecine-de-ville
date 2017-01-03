@@ -1,10 +1,15 @@
 import React, { PropTypes } from 'react'
-import { IconButton, FontIcon } from 'react-toolbox'
+import { IconButton, FontIcon, ProgressBar } from 'react-toolbox'
+import loader from 'hoc-react-loader'
 import styles from './search.style'
 
 const Search = ({ className, where, what, onChangeWhere, onChangeWhat, updatePosition }) => (
   <div className={`${styles.search} ${className}`}>
-    {(!where || !what) && <div className={styles.label}><FontIcon value="search" />Vous recherchez</div>}
+    {(!where || !what) &&
+    <div className={styles.label}>
+      <FontIcon value="search" />
+      Vous recherchez
+    </div>}
     <div className={styles.box}>
       <input
         value={what}
@@ -21,6 +26,14 @@ const Search = ({ className, where, what, onChangeWhere, onChangeWhat, updatePos
 
 Search.propTypes = {
   className: PropTypes.string,
+  where: PropTypes.string,
+  what: PropTypes.string,
+  onChangeWhere: PropTypes.func,
+  onChangeWhat: PropTypes.func,
+  updatePosition: PropTypes.func,
 }
 
-export default Search
+export default loader(Search, {
+  wait: ['where', 'what'],
+  LoadingIndicator: () => <ProgressBar type="circular" mode="indeterminate" multicolor />,
+})

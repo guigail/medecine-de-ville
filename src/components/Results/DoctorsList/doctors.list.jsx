@@ -1,14 +1,13 @@
 import React, { PropTypes } from 'react'
 import loader from 'hoc-react-loader'
-import { List, ListSubHeader, ListDivider, ProgressBar } from 'react-toolbox'
+import { List, ListSubHeader, ProgressBar } from 'react-toolbox'
 import Doctor from '../Doctor'
 import DoctorSummary from '../DoctorSummary'
 import styles from './doctors.list.style'
 
 const DoctorsList = ({ doctors, what }) => (
   <List className={styles.list} selectable>
-    <ListSubHeader caption={what.join(', ')}/>
-
+    <ListSubHeader caption={what.join(', ')} />
     {doctors.map(doctor =>
       <div key={doctor.id}>
         <Doctor

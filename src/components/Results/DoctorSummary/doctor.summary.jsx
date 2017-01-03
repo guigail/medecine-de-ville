@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react'
 import loader from 'hoc-react-loader'
-import { List, ListItem, Tooltip, Button } from 'react-toolbox'
+import { List, ListItem, Button } from 'react-toolbox'
 import { getIconByContactType } from 'redux/doctors'
 import styles from './doctor.summary.style'
 

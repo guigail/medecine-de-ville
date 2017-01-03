@@ -39,5 +39,4 @@ export const getClosedDays = (openingDays = OPENING_ALL_DAYS) => {
         return 0
     }
   }))
-
 }

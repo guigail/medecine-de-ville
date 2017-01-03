@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react'
 import loader from 'hoc-react-loader'
-import { ListItem, CardTitle } from 'react-toolbox'
+import { ListItem, ProgressBar } from 'react-toolbox'
 import AvatarDoctor from '../../UI/AvatarDoctor'
 import styles from './doctor.style'
 
@@ -28,4 +28,7 @@ Doctor.propTypes = {
   selectDoctor: PropTypes.func,
 }
 
-export default loader(Doctor, { wait: false })
+export default loader(Doctor, {
+  wait: ['doctor'],
+  LoadingIndicator: () => <ProgressBar type="circular" mode="indeterminate" multicolor />,
+})

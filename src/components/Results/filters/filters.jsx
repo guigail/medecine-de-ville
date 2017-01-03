@@ -1,7 +1,6 @@
 import React, { PropTypes } from 'react'
-
 import loader from 'hoc-react-loader'
-import { Input, IconButton, Tooltip } from 'react-toolbox'
+import { Input, IconButton, Tooltip, ProgressBar } from 'react-toolbox'
 import Slider from 'rc-slider'
 import styles from './filters.style'
 
@@ -29,6 +28,11 @@ class Filters extends React.Component {
 
 
   render() {
+    const {
+      activeFilters,
+      toggleFilters,
+    } = this.props
+
     const marks = {
       0: <strong>0 €</strong>,
       30: {
@@ -45,11 +49,6 @@ class Filters extends React.Component {
       },
     }
 
-    const {
-      activeFilters,
-      toggleFilters,
-    } = this.props
-
     return (
       <div className={styles.all}>
         <TooltipButton
@@ -57,7 +56,7 @@ class Filters extends React.Component {
           icon="filter_list"
           tooltip="Filtrer"
           tooltipDelay={500}
-          onClick={() => toggleFilters()}/>
+          onClick={() => toggleFilters()} />
         <div className={!activeFilters ? styles.filtersHidden : styles.filters}>
           <Input
             type="text"
@@ -89,8 +88,11 @@ Filters.propTypes = {
   filters: PropTypes.object,
   activeFilters: PropTypes.bool,
   toggleFilters: PropTypes.func,
-  applyNameFilters: PropTypes.func,
-  applyRACFilters: PropTypes.func,
+  applyFiltersName: PropTypes.func,
+  applyFiltersRAC: PropTypes.func,
 }
 
-export default loader(Filters, { wait: ['filters'] })
+export default loader(Filters, {
+  wait: ['doctors'],
+  LoadingIndicator: () => <ProgressBar type="circular" mode="indeterminate" multicolor />,
+})

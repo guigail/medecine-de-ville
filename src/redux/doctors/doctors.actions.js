@@ -1,4 +1,4 @@
-import { pick, filter, random, toLower, update } from 'lodash'
+import { pick, random, toLower, update } from 'lodash'
 import {
   API_URL_PAGEJAUNE_PRO,
   PAGEJAUNE_API_ID,
@@ -53,12 +53,14 @@ export const filterDoctors = () => (dispatch, getState) => {
     getDoctors(getState()).map(
       d => update(d,
         'ui.visible',
-        () => (filters.RAC[0] < d.RAC && d.RAC < filters.RAC[1]) && toLower(d.name).includes(toLower(filters.name)))
+        () =>
+        (filters.RAC[0] < d.RAC && d.RAC < filters.RAC[1]) &&
+        toLower(d.name).includes(toLower(filters.name)))
     )))
 }
 
 export const FETCH_DOCTORS = 'FETCH_DOCTORS'
-const fetchDoctors = ({ where, what }) => (dispatch, getState) => {
+const fetchDoctors = ({ where, what }) => (dispatch) => {
   dispatch({ type: FETCH_DOCTORS })
 
   fetch(`${API_URL_PAGEJAUNE_PRO}/find.json?where=${where}&what=${what}&app_id=${PAGEJAUNE_API_ID}&app_key=${PAGEJAUNE_API_KEY}`)

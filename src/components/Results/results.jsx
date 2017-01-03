@@ -6,6 +6,7 @@ import DoctorsMap from './DoctorsMap'
 import MakeAnAppointment from './MakeAnAppointment'
 import Filters from './Filters'
 import styles from './results.style'
+import Messages from '../Messages'
 
 const Results = ({ doctors, searchIsActive }) => {
   let component = <h1></h1>
@@ -23,6 +24,7 @@ const Results = ({ doctors, searchIsActive }) => {
           <DoctorsMap />
         </div>
         <MakeAnAppointment />
+        <Messages />
       </div>
     )
   }

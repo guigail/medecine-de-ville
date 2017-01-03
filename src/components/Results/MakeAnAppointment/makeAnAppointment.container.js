@@ -7,22 +7,18 @@ import { makeAnAppointment, cancelAnAppointment, closeDialog } from './makeAnApp
 
 const mapStateToProps = (state) => {
   const doctorSelected = getSelected(state)
-  const appointment = getAppointmentByDoctor(state, doctorSelected.merchantId)
-  const active = getDialogActive(state)
 
   return {
     doctorSelected,
-    appointment,
-    active,
+    appointment: getAppointmentByDoctor(state, doctorSelected.merchantId),
+    active: getDialogActive(state),
   }
 }
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    makeAnAppointment: (date) => dispatch(makeAnAppointment(date)),
-    closeDialog: () => dispatch(closeDialog()),
-    cancelAnAppointment: appointment => dispatch(cancelAnAppointment(appointment)),
-  }
-}
+const mapDispatchToProps = (dispatch) => ({
+  makeAnAppointment: date => dispatch(makeAnAppointment(date)),
+  closeDialog: () => dispatch(closeDialog()),
+  cancelAnAppointment: appointment => dispatch(cancelAnAppointment(appointment)),
+})
 
 export default connect(mapStateToProps, mapDispatchToProps)(Component)

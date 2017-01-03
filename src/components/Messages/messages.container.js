@@ -3,19 +3,12 @@ import { getMessagesActive } from 'redux/ui'
 import { toggleMessagesActive } from './messages.actions'
 import Component from './messages'
 
-const mapStateToProps = (state) => {
-  const active = getMessagesActive(state)
-  console.log(active)
-  return {
-    active,
-  }
-}
+const mapStateToProps = state => ({
+  active: getMessagesActive(state),
+})
 
-const mapDispatchToProps = (dispatch) => {
-  return {
-    toggleMessagesActive: () => dispatch(toggleMessagesActive()),
-  }
-}
-
+const mapDispatchToProps = dispatch => ({
+  toggleMessagesActive: () => dispatch(toggleMessagesActive()),
+})
 
 export default connect(mapStateToProps, mapDispatchToProps)(Component)

@@ -1,5 +1,11 @@
 import { update } from 'lodash'
-import { SET_DOCTORS, RESET_DOCTORS, SET_DOCTOR, SELECT_DOCTOR, UNSELECT_DOCTORS } from './doctors.actions'
+import {
+  SET_DOCTORS,
+  RESET_DOCTORS,
+  SET_DOCTOR,
+  SELECT_DOCTOR,
+  UNSELECT_DOCTORS
+} from './doctors.actions'
 
 export const initState = []
 export const initAction = { type: 'UNKNOWN' }

@@ -1,23 +1,11 @@
 import React, { PropTypes } from 'react'
 import moment from 'moment'
 import loader from 'hoc-react-loader'
-import { Dialog, DatePicker, TimePicker, CardMedia, ProgressBar } from 'react-toolbox'
+import { Dialog, DatePicker, TimePicker, ProgressBar } from 'react-toolbox'
 import InfiniteCalendar from 'react-infinite-calendar'
 import styles from './makeAnAppointment.style'
+import { locale } from './makeAnAppointment.constant'
 
-const locale = {
-  name: 'fr',
-  headerFormat: 'dddd, Do MMM',
-  months: ["Janvier", "Fevrier", "Mars", "Avril", "Mai", "Juin", "Juillet", "Aout", "Septembre", "Octobre", "Novembre", "Decembre"],
-  monthsShort: ["Janv", "Fevr", "Mars", "Avr", "Mai", "Juin", "Juil", "Aout", "Sept", "Oct", "Nov", "Dec"],
-  weekdays: ["Dimanche", "Lundi", "Mardi", "Mercredi", "Jeudi", "Vendredi", "Samedi"],
-  weekdaysShort: ["Dim", "Lun", "Mar", "Mer", "Jeu", "Ven", "Sam"],
-  blank: 'Aucune date selectionnee',
-  todayLabel: {
-    long: 'Aujourd\'hui',
-    short: 'Auj.'
-  }
-}
 
 class MakeAnAppointment extends React.Component {
 
@@ -63,7 +51,7 @@ class MakeAnAppointment extends React.Component {
           minDate={moment()}
           max={moment().add(1, 'year')}
           locale={locale}
-          keyboardSupport={true}
+          keyboardSupport
           showHeader={false}
           onSelect={(date) => {
             this.state.date.day(date.day())

@@ -1,9 +1,9 @@
-import React from 'react'
+import React, { PropTypes } from 'react'
 import { AppBar } from 'react-toolbox'
 import Search from './Search'
 import styles from './appbar.style'
 
-const Appbar = ({searchIsActive, toggleDrawerActive }) => {
+const Appbar = ({ searchIsActive, toggleDrawerActive }) => {
   return (
     <AppBar
       theme={styles}
@@ -15,6 +15,11 @@ const Appbar = ({searchIsActive, toggleDrawerActive }) => {
       <Search className={!searchIsActive ? styles.search : ''} />
     </AppBar>
   )
+}
+
+Appbar.propTypes = {
+  searchIsActive: PropTypes.func,
+  toggleDrawerActive: PropTypes.func,
 }
 
 export default Appbar

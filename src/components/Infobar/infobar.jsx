@@ -2,7 +2,7 @@ import React, { PropTypes } from 'react'
 import { Sidebar, IconButton } from 'react-toolbox'
 import styles from './infobar.styles'
 
-const Infobar = ({ doctor, pinned, toggleSidebarPinned }) => (
+const Infobar = ({ pinned, toggleSidebarPinned }) => (
   <Sidebar
     theme={styles}
     pinned={pinned}
@@ -15,7 +15,6 @@ const Infobar = ({ doctor, pinned, toggleSidebarPinned }) => (
 )
 
 Infobar.propTypes = {
-  doctor: PropTypes.object.isRequired,
   pinned: PropTypes.bool.isRequired,
   toggleSidebarPinned: PropTypes.func.isRequired,
 }

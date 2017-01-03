@@ -2,9 +2,8 @@ import { addAppointment, deleteAppointment, getAppointmentByDoctor } from 'redux
 import { getSelected } from 'redux/doctors'
 import { setDialogActive, getDialogActive, setMessagesActive } from 'redux/ui'
 
-export const closeDialog = () => (dispatch, getState) => {
+export const closeDialog = () => (dispatch, getState) =>
   dispatch(setDialogActive(!getDialogActive(getState())))
-}
 
 export const makeAnAppointment = date => (dispatch, getState) => {
   const idDoctor = getSelected(getState()).merchantId
@@ -13,6 +12,5 @@ export const makeAnAppointment = date => (dispatch, getState) => {
   dispatch(setMessagesActive(true))
 }
 
-export const cancelAnAppointment = appointment => (dispatch) => {
+export const cancelAnAppointment = appointment => (dispatch) =>
   dispatch(deleteAppointment(appointment))
-}

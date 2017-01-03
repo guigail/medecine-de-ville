@@ -1,32 +1,9 @@
 import React, { PropTypes } from 'react'
-import loader from 'hoc-react-loader'
-import { withGoogleMap, GoogleMap, InfoWindow, Marker, Circle, ProgressBar } from 'react-google-maps'
 import { find } from 'lodash'
-import MarkerClusterer from 'react-google-maps/lib/addons/MarkerClusterer'
-import myposition from './images/markers/myposition.png'
-import doctor from './images/markers/doctor.png'
-import doctor_selected from './images/markers/doctor.selected.png'
-
-const iconPosition = {
-  url: `${myposition}`,
-  size: new google.maps.Size(16, 16),
-  origin: new google.maps.Point(0, 0),
-  anchor: new google.maps.Point(8, 8),
-}
-
-const iconDoctor = {
-  url: `${doctor}`,
-  size: new google.maps.Size(24, 34),
-  origin: new google.maps.Point(0, 0),
-  anchor: new google.maps.Point(0, 17),
-}
-
-const iconDoctorSelected = {
-  url: `${doctor_selected}`,
-  size: new google.maps.Size(24, 34),
-  origin: new google.maps.Point(0, 0),
-  anchor: new google.maps.Point(0, 17),
-}
+import loader from 'hoc-react-loader'
+import { withGoogleMap, GoogleMap, InfoWindow, Marker, Circle } from 'react-google-maps'
+import { ProgressBar } from 'react-toolbox'
+import { iconPosition, iconDoctor, iconDoctorSelected } from './images'
 
 const centerOfSelection = (markers, defaultPosition) => {
   const marker = find(markers, { ui: { selected: true } })
@@ -78,5 +55,5 @@ GoogleMapMarker.propTypes = {
 
 export default loader(GoogleMapMarker, {
   wait: ['markers'],
-  LoadingIndicator: () => <ProgressBar type="circular" mode="indeterminate" multicolor/>,
+  LoadingIndicator: () => <ProgressBar type="circular" mode="indeterminate" multicolor />,
 })
