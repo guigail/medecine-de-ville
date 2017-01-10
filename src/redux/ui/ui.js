@@ -1,6 +1,6 @@
 import { update } from 'lodash'
 import { FETCH_DOCTORS } from 'redux/doctors'
-import { SET_WHO, SET_WHERE, SET_SEARCH } from 'redux/search'
+import { SET_WHAT, SET_WHERE, SET_SEARCH } from 'redux/search'
 
 import {
   SET_DRAWER_ACTIVE, SET_DRAWER_PINNED,
@@ -52,7 +52,7 @@ export default (state = initState, action = initAction) => {
     case FETCH_DOCTORS:
       return update(state, 'timestamps.fetch', () => new Date().getTime())
     case SET_WHERE:
-    case SET_WHO:
+    case SET_WHAT:
     case SET_SEARCH:
       return update(state, 'timestamps.touch', () => new Date().getTime())
     default:

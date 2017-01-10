@@ -21,11 +21,12 @@ export const changeWhere = where => (dispatch) => {
 }
 
 export const changeWhat = what => (dispatch) => {
-  dispatch(setWhat([what]))
+  dispatch(setWhat(what))
   dispatch(lazyFetchDoctors())
 }
 
 export const updateMyPosition = () => (dispatch) => {
   dispatch(unselectDoctors())
   dispatch(updatePosition())
+  dispatch(lazyFetchDoctors())
 }

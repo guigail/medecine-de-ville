@@ -18,7 +18,7 @@ const Appbar = ({ searchIsActive, toggleDrawerActive }) => {
 }
 
 Appbar.propTypes = {
-  searchIsActive: PropTypes.func,
+  searchIsActive: PropTypes.bool,
   toggleDrawerActive: PropTypes.func,
 }
 

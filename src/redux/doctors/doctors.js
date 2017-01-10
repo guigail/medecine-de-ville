@@ -4,7 +4,7 @@ import {
   RESET_DOCTORS,
   SET_DOCTOR,
   SELECT_DOCTOR,
-  UNSELECT_DOCTORS
+  UNSELECT_DOCTORS,
 } from './doctors.actions'
 
 export const initState = []

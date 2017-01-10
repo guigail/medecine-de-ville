@@ -7,7 +7,7 @@ import styles from './doctors.list.style'
 
 const DoctorsList = ({ doctors, what }) => (
   <List className={styles.list} selectable>
-    <ListSubHeader caption={what.join(', ')} />
+    <ListSubHeader caption={what} />
     {doctors.map(doctor =>
       <div key={doctor.id}>
         <Doctor
@@ -25,7 +25,7 @@ const DoctorsList = ({ doctors, what }) => (
 
 DoctorsList.propTypes = {
   doctors: PropTypes.arrayOf(PropTypes.object).isRequired,
-  what: PropTypes.arrayOf(PropTypes.string),
+  what: PropTypes.string,
 }
 
 export default loader(DoctorsList, {

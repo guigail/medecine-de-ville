@@ -1,6 +1,7 @@
 import React, { PropTypes } from 'react'
-import { IconButton, FontIcon, ProgressBar } from 'react-toolbox'
+import { IconButton, FontIcon } from 'react-toolbox'
 import loader from 'hoc-react-loader'
+import { startsWith } from 'lodash'
 import styles from './search.style'
 
 const Search = ({ className, where, what, onChangeWhere, onChangeWhat, updatePosition }) => (
@@ -18,8 +19,18 @@ const Search = ({ className, where, what, onChangeWhere, onChangeWhat, updatePos
       />
     </div>
     <div className={styles.box}>
-      <input value={where} placeholder="Où ?" onChange={e => onChangeWhere(e)} />
-      <IconButton icon="my_location" onClick={updatePosition} disabled />
+      { startsWith(where, 'cZ') ?
+        <input
+          placeholder="A côté de moi"
+          onChange={e => onChangeWhere(e)}
+        /> :
+        <input
+          value={where}
+          placeholder="Où ?"
+          onChange={e => onChangeWhere(e)}
+        />
+      }
+      <IconButton icon="my_location" onClick={updatePosition} />
     </div>
   </div>
 )
@@ -34,6 +45,5 @@ Search.propTypes = {
 }
 
 export default loader(Search, {
-  wait: ['where', 'what'],
-  LoadingIndicator: () => <ProgressBar type="circular" mode="indeterminate" multicolor />,
+  wait: false,
 })

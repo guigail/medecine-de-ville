@@ -24,7 +24,6 @@ const Results = ({ doctors, searchIsActive }) => {
           <DoctorsMap />
         </div>
         <MakeAnAppointment />
-        <Messages />
       </div>
     )
   }

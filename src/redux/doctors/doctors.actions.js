@@ -30,12 +30,18 @@ export const fetchDoctorInfo = doctor => (dispatch) => {
   if (doctor.merchantId && !doctor.infoLoaded) {
     fetch(`${API_URL_PAGEJAUNE_PRO}/listings/by_merchant_id-${doctor.merchantId}.json?app_id=${PAGEJAUNE_API_INFO_ID}&app_key=${PAGEJAUNE_API_INFO_KEY}`)
       .then(raw => raw.json())
-      .then(({ description, photos, categories, inscriptions, schedules }) => {
+      .then(({ description, photos, categories, inscriptions, schedules, healthcare }) => {
+
+        let price = undefined
+        if (healthcare && healthcare.consultation_fees) {
+          price = [healthcare.consultation_fees.min_price, healthcare.consultation_fees.max_price]
+        }
         dispatch(setDoctor({
           ...doctor,
           infoLoaded: true,
           photo: photos ? photos[0].url : '',
           description,
+          price,
           categorie: categories ? categories[0].category_name : '',
           contacts: inscriptions ? inscriptions[0].contact_infos : [],
           closedDays: (schedules && schedules.opening_days) ?
@@ -86,11 +92,14 @@ const fetchDoctors = ({ where, what }) => (dispatch) => {
             }
           })
       }
-      return {}
+      return []
     })
     .then((doctors) => {
-      dispatch(setDoctors(doctors))
-      return doctors
+      if (doctors.length > 0) {
+        dispatch(setDoctors(doctors))
+      } else {
+        dispatch(resetDoctors)
+      }
     })
 }
 

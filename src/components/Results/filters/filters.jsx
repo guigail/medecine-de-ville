@@ -1,6 +1,6 @@
 import React, { PropTypes } from 'react'
 import loader from 'hoc-react-loader'
-import { Input, IconButton, Tooltip, ProgressBar } from 'react-toolbox'
+import { Input, IconButton, Tooltip } from 'react-toolbox'
 import Slider from 'rc-slider'
 import styles from './filters.style'
 
@@ -93,6 +93,5 @@ Filters.propTypes = {
 }
 
 export default loader(Filters, {
-  wait: ['doctors'],
-  LoadingIndicator: () => <ProgressBar type="circular" mode="indeterminate" multicolor />,
+  wait: false,
 })
