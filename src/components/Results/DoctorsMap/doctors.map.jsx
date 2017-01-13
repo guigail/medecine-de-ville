@@ -5,11 +5,11 @@ import GoogleMap from './GoogleMap'
 import styles from './doctors.map.style'
 import AvatarDoctor from '../../UI/AvatarDoctor'
 
-const infoContent = ({ name, address, photo, RAC }) => (
+const infoContent = ({ name, address, photos, price }) => (
   <div className={styles.info}>
-    <AvatarDoctor name={name} photo={photo} />
+    <AvatarDoctor name={name} photo={photos} />
     <h1>{name}</h1>
-    <h2>{RAC} €</h2>
+    <h2>{`${price ? price : '23'} €`}</h2>
   </div>
 )
 
@@ -30,14 +30,18 @@ class DoctorsMap extends React.Component {
           position={position}
 
           markers={doctors.length > 0 ?
-        doctors.map(({ geolocation: { latitude, longitude }, id, ui: { selected }, ...doctor }) => {
-          return {
-            id,
-            position: new google.maps.LatLng(latitude, longitude),
-            showInfo: selected,
-            infoContent: infoContent(doctor),
-          }
-        }) : []}
+          doctors.map((
+            { address: { geolocation: { latitude, longitude } },
+             id,
+             ui: { selected },
+             ...doctor }) => {
+            return {
+              id,
+              position: new google.maps.LatLng(latitude, longitude),
+              showInfo: selected,
+              infoContent: infoContent(doctor),
+            }
+          }) : []}
 
           onMarkerClick={selectDoctor}
           onMarkerClose={unselectDoctor}
@@ -59,5 +63,5 @@ DoctorsMap.propTypes = {
 
 export default loader(DoctorsMap, {
   wait: ['doctors'],
-  LoadingIndicator: () => <ProgressBar type="circular" mode="indeterminate" multicolor />,
+  LoadingIndicator: () => <ProgressBar type="circular" mode="indeterminate" multicolor/>,
 })

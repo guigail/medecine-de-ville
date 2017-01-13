@@ -14,7 +14,7 @@ const Doctor = ({ id, doctor, selected, selectDoctor }) => (
       <div className={styles.doctor}>
         <AvatarDoctor {...doctor} />
         <h1>{doctor.name}</h1>
-        <h2>{doctor.RAC} €</h2>
+        <h2>{`${doctor.price ? doctor.price : '23'} €`}</h2>
       </div>
     }
     onClick={() => { selectDoctor(id) }}
@@ -22,7 +22,7 @@ const Doctor = ({ id, doctor, selected, selectDoctor }) => (
 )
 
 Doctor.propTypes = {
-  id: PropTypes.number.isRequired,
+  id: PropTypes.string.isRequired,
   doctor: PropTypes.object.isRequired,
   selected: PropTypes.bool,
   selectDoctor: PropTypes.func,

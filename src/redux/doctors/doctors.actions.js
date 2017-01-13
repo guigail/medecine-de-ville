@@ -1,11 +1,5 @@
-import { pick, random, toLower, update } from 'lodash'
-import {
-  API_URL_PAGEJAUNE_PRO,
-  PAGEJAUNE_API_ID,
-  PAGEJAUNE_API_KEY,
-  PAGEJAUNE_API_INFO_ID,
-  PAGEJAUNE_API_INFO_KEY,
-} from 'redux/constants'
+import { toLower, update } from 'lodash'
+import { API_URL_PAGEJAUNE, API_URL_PAGEJAUNE_FIND } from 'redux/constants'
 import { getSearch } from 'redux/search'
 import { getClosedDays, getDoctors } from 'redux/doctors'
 import { getTimestamps } from 'redux/ui'
@@ -28,27 +22,9 @@ export const setDoctors = doctors => ({ type: SET_DOCTORS, payload: doctors })
 
 export const fetchDoctorInfo = doctor => (dispatch) => {
   if (doctor.merchantId && !doctor.infoLoaded) {
-    fetch(`${API_URL_PAGEJAUNE_PRO}/listings/by_merchant_id-${doctor.merchantId}.json?app_id=${PAGEJAUNE_API_INFO_ID}&app_key=${PAGEJAUNE_API_INFO_KEY}`)
-      .then(raw => raw.json())
-      .then(({ description, photos, categories, inscriptions, schedules, healthcare }) => {
-
-        let price = undefined
-        if (healthcare && healthcare.consultation_fees) {
-          price = [healthcare.consultation_fees.min_price, healthcare.consultation_fees.max_price]
-        }
-        dispatch(setDoctor({
-          ...doctor,
-          infoLoaded: true,
-          photo: photos ? photos[0].url : '',
-          description,
-          price,
-          categorie: categories ? categories[0].category_name : '',
-          contacts: inscriptions ? inscriptions[0].contact_infos : [],
-          closedDays: (schedules && schedules.opening_days) ?
-            getClosedDays(schedules.opening_days) :
-            [],
-        }))
-      })
+    fetch(`${API_URL_PAGEJAUNE}/${doctor.merchantId}`)
+      .then(response => response.json())
+      .then(doctorInfo => dispatch(setDoctor({ ...doctorInfo, infoLoaded: true })))
   }
 }
 
@@ -59,44 +35,34 @@ export const filterDoctors = () => (dispatch, getState) => {
     getDoctors(getState()).map(
       d => update(d,
         'ui.visible',
-        () =>
-        (filters.RAC[0] < d.RAC && d.RAC < filters.RAC[1]) &&
-        toLower(d.name).includes(toLower(filters.name)))
-    )))
+        () => {
+          const allPrice = d.rac != null ? d.rac : (d.price != null ? d.price : '23')
+          return (filters.RAC[0] < allPrice && allPrice < filters.RAC[1])
+            && toLower(d.name).includes(toLower(filters.name))
+        }
+      ))))
 }
 
 export const FETCH_DOCTORS = 'FETCH_DOCTORS'
 const fetchDoctors = ({ where, what }) => (dispatch) => {
   dispatch({ type: FETCH_DOCTORS })
 
-  fetch(`${API_URL_PAGEJAUNE_PRO}/find.json?where=${where}&what=${what}&app_id=${PAGEJAUNE_API_ID}&app_key=${PAGEJAUNE_API_KEY}`)
+  fetch(`${API_URL_PAGEJAUNE_FIND}?where=${where}&what=${what}&info=true&maxByPage=30`)
   // Json parsing
-    .then(raw => raw.json())
+    .then(response => response.json())
     // transform result
-    .then(({ context: { results: { total_listing } }, ...raw }) => {
-      if (total_listing > 0) {
-        return raw.search_results.listings.map(
-          (doctor) => {
-            return {
-              id: doctor.position,
-              merchantId: doctor.merchant_id,
-              name: doctor.merchant_name,
-              address: { ...pick(doctor.inscriptions[0], 'address_street', 'address_zipcode', 'address_city') },
-              geolocation: { ...pick(doctor.inscriptions[0], 'latitude', 'longitude') },
-              contacts: doctor.inscriptions[0].contact_info,
-              RAC: random(0, 100),
-              ui: {
-                selected: false,
-                visible: true,
-              },
-            }
-          })
-      }
-      return []
-    })
     .then((doctors) => {
       if (doctors.length > 0) {
-        dispatch(setDoctors(doctors))
+        // add ui value for all doctors
+        dispatch(setDoctors(doctors.map((doctor) => {
+          return {
+            ...doctor,
+            ui: {
+              selected: false,
+              visible: true,
+            },
+          }
+        })))
       } else {
         dispatch(resetDoctors)
       }

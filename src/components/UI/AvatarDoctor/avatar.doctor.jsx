@@ -3,15 +3,15 @@ import loader from 'hoc-react-loader'
 import { ProgressBar } from 'react-toolbox'
 import Avatar from 'react-avatar'
 
-const AvatarDoctor = ({ name, photo }) => (
-  photo ?
-    <Avatar round size={50} src={photo} /> :
+const AvatarDoctor = ({ name, photos }) => (
+  photos ?
+    <Avatar round size={50} src={photos[0]} /> :
     <Avatar round size={50} name={name} />
 )
 
 AvatarDoctor.propTypes = {
   name: PropTypes.string.isRequired,
-  photo: PropTypes.string,
+  photos: PropTypes.arrayOf(PropTypes.string),
 }
 
 export default loader(AvatarDoctor, {
